@@ -10,6 +10,8 @@
     <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
     <link id='stylecss' type="text/css" rel="stylesheet" href="style.css">
     <script src='../wireframe.js'></script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:700|Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -39,13 +41,28 @@
 
             <!-- About Us -->
             <section id="about_us">
-                <header class="topic">
+            <header class="topic">
                     <h2>About Us</h2>
                     <p> Welcome to the Lunardo Cinema! <br> We are very excited to announce our brand new Cinema after extensive improvements and renovations. From upgrading our seating to comfy leather recliners,
                     to overhauling our projector and sound systems, we hope to bring an all new movie experience for you, friends and family. </p>
-                </header>
-            </section>
-
+                    <div class = "standard">
+                        <p> Our new standard seats have been made a lot softer and much more comfier, perfect for those lengthy films! </p>
+                    <img class = "standard" src='../../media/standard-seat.png'/>
+                    </div>
+                    <div class = "first-class">
+                        <p> Our first class seats can now recline back and include a food tray, no need to avoid the front rows anymore!</p>
+                        <img class = "standard" src='../../media/first-class-seat.png'/>
+                    </div>
+                    <div class = "projector">
+                        <p> With our brand new Dolby 3D projectors, you can choose to now watch your favourite movies in 3D!</p>
+                        <img class = "standard" src='../../media/projector.png'/>
+                    </div>
+                    <div class = "sound">
+                        <p> Our brand new Dolby sound system now allows sound to come from all over, giving an immersive experience!</p>
+                        <img class = "standard" src='../../media/sound-system.png'/>
+                    </div>
+           </header>
+           </section>
             <!-- Prices -->
             <section id="prices">
                 <header class="topic">

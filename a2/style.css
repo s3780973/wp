@@ -30,29 +30,31 @@ img {
 /* Style all headers */
 
 header {
-    border-style: solid;
-    border-color: black;
-    border-width: 0.35vw;
-    /*border-top-width: 0px;*/
-    background-color: rgba(196, 1, 114, 0.856);
     height: 100vh;
 }
 
 header.heading {
     height: 15vw;
+    background-image: url("../../media/header.png");
+    position: relative;
+    background-size: contain;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.35vw;
 }
 
 header.heading span {
-    color: rgb(0, 0, 0);
-    font-size: 6.1vw;
-	vertical-align: 5vw;
-	/*padding-left: 1.5vw;*/
-	text-align: middle;
-	padding-left: 1vw;
+    font-family: 'Cinzel Decorative', cursive;
+    color: rgb(228, 206, 145);
+    font-size: 4.6vw;
+    vertical-align: 5vw;
+    /*padding-left: 1.5vw;*/
+    text-align: middle;
+    padding-left: 1vw;
 }
 
 header.heading img.right {
-	float: right;
+    float: right;
 }
 
 
@@ -62,12 +64,13 @@ nav#navbar {
     border-style: solid;
     border-color: black;
     border-width: 0.35vw;
-    background-color: rgb(195, 0, 255);
+    background-color: rgb(191, 1, 248);
     overflow: hidden;
-    height: 40px; /* 2.8vw */
+    height: 40px + 4vw;
+    /* 2.8vw */
     font-weight: bold;
-	position: sticky;
-	top: 0;
+    position: sticky;
+    top: 0;
 }
 
 nav#navbar ul {
@@ -107,41 +110,91 @@ nav#navbar a.active {
     color: blue;
 }
 
+
+/* MAIN SECTIONS */
+
 header.topic h2 {
-    font-size: calc(16px + 1vw); /* 1.7vw */
+    font-size: calc(16px + 1vw);
+    /* 1.7vw */
     text-align: center;
-    margin-bottom: -10px;
+    padding-top: 1vw;
 }
 
 header.topic p {
-    font-size: calc(13px + 0.7vw); /* 1.2vw*/
-    text-align: left;
+    font-size: calc(12px + 0.6vw);
+    /* 1.2vw*/
+    text-align: center;
     padding-left: 10px;
     padding-right: 10px;
 }
 
+section {
+    background-attachment: fixed;
+    margin: auto;
+    background-size: cover;
+    border-width: 0.35vw;
+    border-style: solid;
+    border-color: black;
+}
+
+section#about_us {
+    text-align: center;
+    background-image: url("../../media/lobby.png");
+}
+
 
 /*
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
+@media screen and (max-width: 1027px) {
+    section#about_us div {}
+    section#about_us div img {
+        width: 200px;
+    }
 }
 */
 
-
-/*
-section#about_us {
-    /* The image used 
-    background-image: url("img_parallax.jpg");
-  
-    /* Full height 
+section#about_us header {
+    background: linear-gradient(hsla(331, 100%, 52%, 0.8), hsla(331, 100%, 62%, 0.8));
+    width: 100%;
     height: 100%;
-  
-    /* Create the parallax scrolling effect 
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}*/
+    /* THIS IS THE BUG */
+}
+
+section#about_us div {
+    background-image: linear-gradient(rgb(119, 0, 255, 0.6), rgb(255, 0, 255, 0.6));
+    padding: 2vw;
+    display: inline-block;
+    border-color: black;
+    border-width: 0.35vw;
+    border-style: solid;
+    width: calc(250px + 10vw);
+    height: calc(250px + 10vw);
+}
+
+section#about_us img {
+    width: calc(150px + 10vw);
+    height: calc(150px + 10vw);
+}
+
+
+/* PRICES */
+
+section#prices {
+    background-image: url("../../media/seats.png");
+    /*     width: 100%;
+    height: 100%;
+    */
+}
+
+section#prices header {
+    background: linear-gradient(hsla(331, 100%, 52%, 0.8), hsla(331, 100%, 62%, 0.8));
+}
+
+section#now_showing {
+    background-image: url("../../media/header.png");
+    background-size: contain;
+    /*background-image: linear-gradient(rgba(40, 40, 40, 10), rgba(80, 80, 80, 10));*/
+}
+
+section#now_showing header {
+    background: linear-gradient(hsla(331, 100%, 62%, 0.5), hsla(331, 100%, 76%, 0.5));
+}
