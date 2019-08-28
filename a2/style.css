@@ -1,1 +1,147 @@
 /* Insert your styles here */
+
+html,
+body {
+    scroll-behavior: smooth;
+    /*background-image: linear-gradient(purple, black); */
+    background-image: url("../../media/background.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 90%;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font: 400 15px/1.8 "Lato", sans-serif;
+    color: rgb(0, 0, 0);
+    font-family: "Georgia", cursive, sans-serif;
+}
+
+img {
+    padding: 0;
+    /*display: block; */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+/* Style all headers */
+
+header {
+    border-style: solid;
+    border-color: black;
+    border-width: 0.35vw;
+    /*border-top-width: 0px;*/
+    background-color: rgba(196, 1, 114, 0.856);
+    height: 100vh;
+}
+
+header.heading {
+    height: 15vw;
+}
+
+header.heading span {
+    color: rgb(0, 0, 0);
+    font-size: 6.1vw;
+	vertical-align: 5vw;
+	/*padding-left: 1.5vw;*/
+	text-align: middle;
+	padding-left: 1vw;
+}
+
+header.heading img.right {
+	float: right;
+}
+
+
+/* Add a black background color to the top navigation */
+
+nav#navbar {
+    border-style: solid;
+    border-color: black;
+    border-width: 0.35vw;
+    background-color: rgb(195, 0, 255);
+    overflow: hidden;
+    height: 40px; /* 2.8vw */
+    font-weight: bold;
+	position: sticky;
+	top: 0;
+}
+
+nav#navbar ul {
+    list-style-type: none;
+    position: -webkit-sticky;
+    /* for ios*/
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+
+/* Style the links inside the navigation bar */
+
+nav#navbar a {
+    float: left;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 20px;
+}
+
+
+/* Change the color of links on hover */
+
+nav#navbar a:hover {
+    background-color: rgb(0, 0, 0, 0.1);
+    color: rgb(22, 0, 32);
+}
+
+
+/* Add a color to the active/current link */
+
+nav#navbar a.active {
+    background-color: #4CAF50;
+    color: blue;
+}
+
+header.topic h2 {
+    font-size: calc(16px + 1vw); /* 1.7vw */
+    text-align: center;
+    margin-bottom: -10px;
+}
+
+header.topic p {
+    font-size: calc(13px + 0.7vw); /* 1.2vw*/
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/*
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+*/
+
+
+/*
+section#about_us {
+    /* The image used 
+    background-image: url("img_parallax.jpg");
+  
+    /* Full height 
+    height: 100%;
+  
+    /* Create the parallax scrolling effect 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}*/
