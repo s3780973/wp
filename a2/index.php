@@ -11,7 +11,9 @@
     <link id='stylecss' type="text/css" rel="stylesheet" href="style.css">
     <script src='../wireframe.js'></script>
 	
-	<link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:700|Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:700|Pacifico&display=swap" rel="stylesheet"> <!-- Title -->
+    <link href="https://fonts.googleapis.com/css?family=Forum&display=swap" rel="stylesheet"> <!-- old font, delete -->
+    <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -43,23 +45,23 @@
             <section id="about_us">
             <header class="topic">
                     <h2>About Us</h2>
-                    <p> Welcome to the Lunardo Cinema! <br> We are very excited to announce our brand new Cinema after extensive improvements and renovations. From upgrading our seating to comfy leather recliners,
-                    to overhauling our projector and sound systems, we hope to bring an all new movie experience for you, friends and family. </p>
-                    <div class = "standard">
-                        <p> Our new standard seats have been made a lot softer and much more comfier, perfect for those lengthy films! </p>
-                    <img class = "standard" src='../../media/standard-seat.png'/>
+                    <p>Welcome to the Lunardo Cinema! <br> We are very excited to announce our brand new Cinema after extensive improvements and renovations. From upgrading our seating to comfy leather recliners,
+                    to overhauling our projector and sound systems, we hope to bring an all new movie experience for you, your friends and family!</p>
+                    <div>
+                        <p>Our new standard seats have been made a lot softer and much more comfier, perfect for those lengthy films!</p>
+                    <img src='../../media/standard-seat.png'/>
                     </div>
-                    <div class = "first-class">
-                        <p> Our first class seats can now recline back and include a food tray, no need to avoid the front rows anymore!</p>
-                        <img class = "standard" src='../../media/first-class-seat.png'/>
+                    <div>
+                        <p>Our first class seats can now recline back and include a food tray, no need to avoid the front rows anymore!</p>
+                        <img src='../../media/first-class-seat.png'/>
                     </div>
-                    <div class = "projector">
-                        <p> With our brand new Dolby 3D projectors, you can choose to now watch your favourite movies in 3D!</p>
-                        <img class = "standard" src='../../media/projector.png'/>
+                    <div>
+                        <p>With our brand new Dolby 3D projectors, you can choose to now watch your favourite movies in 3D!</p>
+                        <img src='../../media/projector.png'/>
                     </div>
-                    <div class = "sound">
-                        <p> Our brand new Dolby sound system now allows sound to come from all over, giving an immersive experience!</p>
-                        <img class = "standard" src='../../media/sound-system.png'/>
+                    <div>
+                        <p>Our brand new Dolby sound system now allows sound to come from all over, giving an immersive experience!</p>
+                        <img src='../../media/sound-system.png'/>
                     </div>
            </header>
            </section>
@@ -74,6 +76,27 @@
             <section id="now_showing">
                 <header class="topic">
                     <h2>Now Showing</h2>
+                    <p>We are currently screening the following movies all weekdays and weekends:</p>
+                    <div>
+                    <img src='../../media/avengers-endgame.png'/>
+                        <p class = "title">Avengers: Engame   M</p>
+                        <p class = "times">Times:<br>Wednesday - 9PM<br>Thursday - 9PM<br>Friday - 9PM<br>Saturday - 6PM<br>Sunday - 7PM</p>
+                    </div>
+                    <div>
+                        <img src='../../media/top-end-wedding.png'/>
+                        <p class = "title">Top End Wedding   M</p>
+                        <p class = "times">Times:<br>Monday - 6PM<br>Tuesday - 6PM<br>Saturday - 3PM<br>Sunday - 3PM</p>
+                    </div>
+                    <div>
+                        <img src='../../media/dumbo.png'/>
+                        <p class = "title">Dumbo   PG</p>
+                        <p class = "times">Times:<br>Monday - 12PM<br>Tuesday - 12PM<br>Wednesday - 6PM<br>Thursday - 6PM<br>Friday - 6PM<br>Saturday 12PM<br>Sunday - 12PM</p>
+                    </div>
+                    <div>
+                        <img src='../../media/the-happy-prince.png'/>
+                        <p class = "title">The Happy Prince   MA</p>
+                        <p class = "times">Times:<br>Wednesday - 12PM<br>Thursday - 12PM<br>Friday - 12PM<br>Saturday 9PM<br>Sunday - 9PM</p>
+                    </div>
                 </header>
             </section>
 
