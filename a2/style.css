@@ -184,7 +184,10 @@ section#prices {
 }
 
 section#prices header {
-    background: hsla(234, 81%, 61%, 0.7);
+    background: hsla(209, 75%, 50%, 0.85);
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
 }
 
 section#prices div {
@@ -195,8 +198,9 @@ section#prices div {
     border-color: black;
     border-width: 0.35vw;
     border-style: solid;
-    max-width: 100%;
-    height: 100%;
+    width: calc(290px + 12vw);
+    height: calc(250px + 10vw);
+    text-align: center;
 }
 
 table {
@@ -204,35 +208,34 @@ table {
     border-width: 0.35vw;
     border-color: black;
     border-style: solid;
-    width: 32vw;
+    width: auto;
     text-align: center;
+    font-size: calc(12px + 0.6vw);
 }
 
 table td,
 table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    height: 4vw;
+    border: 1px solid rgb(0, 0, 0);
+    padding: calc(12px + 0.6vw);
 }
 
 table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: rgb(174, 243, 232);
 }
 
 table tr:nth-child(odd) {
-    background-color: #aa3838;
+    background-color: rgb(194, 247, 238);
 }
 
 table tr:hover {
-    background-color: #ddd;
+    background-color: rgb(132, 241, 223);
 }
 
 table th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
+    background-color: rgb(47, 230, 175);
+    color: black;
 }
 
 
@@ -244,7 +247,7 @@ section#now_showing {
 }
 
 section#now_showing header {
-    background: hsla(41, 87%, 53%, 0.7);
+    background: hsla(41, 87%, 53%, 0.75);
 }
 
 section#now_showing div.movie {
@@ -326,4 +329,5 @@ footer {
     border-top-width: 0;
     border-style: solid;
     border-color: black;
+    text-align: center;
 }

@@ -74,13 +74,14 @@
             <section id="prices">
                 <header class="topic">
                     <h2>Prices</h2>
+                    <p>ADD INFO HERE</p>
                     <div>
                     <h2>Standard Seating</h2>
                     <table>
   <tr>
     <th>Seat</th>
     <th>Mondays, Wednesdays and Weekdays 12PM</th>
-    <th>Regular Price</th>
+    <th>Other Times</th>
   </tr>
   <tr>
     <td>Adult</td>
@@ -105,7 +106,7 @@
   <tr>
     <th>Seat</th>
     <th>Mondays, Wednesdays and Weekdays 12PM</th>
-    <th>Regular Price</th>
+    <th>Other Times</th>
   </tr>
   <tr>
     <td>Adult</td>
