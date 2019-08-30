@@ -40,9 +40,7 @@ header.heading {
     background-image: url("../../media/header.png");
     position: relative;
     background-size: contain;
-    border-style: solid;
-    border-color: black;
-    border-width: 0.35vw;
+    border: 0.35vw black solid;
 }
 
 header.heading span {
@@ -131,8 +129,7 @@ section {
     background-attachment: fixed;
     margin: auto;
     background-size: cover;
-    border-width: 0.35vw;
-    border-style: solid;
+    border: 0.35vw black solid;
 }
 
 section header {
@@ -155,7 +152,7 @@ section#about_us {
 }
 
 section#about_us header {
-    background: hsla(331, 100%, 55%, 0.8);
+    background: hsla(331, 100%, 55%, 0.82);
 }
 
 section#about_us div {
@@ -163,9 +160,7 @@ section#about_us div {
     padding: 2vw;
     display: inline-block;
     vertical-align: top;
-    border-color: black;
-    border-width: 0.35vw;
-    border-style: solid;
+    border: 0.35vw black solid;
     width: calc(250px + 10vw);
     height: calc(250px + 10vw);
 }
@@ -195,9 +190,7 @@ section#prices div {
     padding: 2vw;
     display: inline-block;
     vertical-align: top;
-    border-color: black;
-    border-width: 0.35vw;
-    border-style: solid;
+    border: 0.35vw black solid;
     width: calc(290px + 12vw);
     height: calc(250px + 10vw);
     text-align: center;
@@ -205,9 +198,7 @@ section#prices div {
 
 table {
     border-collapse: collapse;
-    border-width: 0.35vw;
-    border-color: black;
-    border-style: solid;
+    border: 0.35vw black solid;
     width: auto;
     text-align: center;
     font-size: calc(12px + 0.6vw);
@@ -255,9 +246,7 @@ section#now_showing div.movie {
     padding: 2vw;
     display: inline-block;
     vertical-align: top;
-    border-color: black;
-    border-width: 0.35vw;
-    border-style: solid;
+    border: 0.35vw black solid;
     width: calc(290px + 12vw);
     height: calc(250px + 10vw);
 }
@@ -325,9 +314,6 @@ section#now_showing article video {
 
 footer {
     background-color: rgba(228, 77, 39, 0.8);
-    border-width: 0.35vw;
-    border-top-width: 0;
-    border-style: solid;
-    border-color: black;
+    border: 0.35vw black solid;
     text-align: center;
 }
