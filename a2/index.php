@@ -190,7 +190,7 @@
             <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
         </footer>
 
-        <article id='Website Under Construction'>
+        <article id='Website-Under-Construction'>
             <!-- Creative Commons image sourced from https://pixabay.com/en/maintenance-under-construction-2422173/ and used for educational purposes only -->
             <img src='../../media/website-under-construction.png' alt='Website Under Construction' />
         </article>
