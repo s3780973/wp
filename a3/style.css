@@ -92,15 +92,9 @@ nav#navbar a {
     font-size: calc(14px + 0.6vw);
 }
 
-nav#navbar a:hover {
-    background-color: rgb(0, 0, 0, 0.1);
-    color: rgb(22, 0, 32);
-}
-
-nav#navbar a.active {
-    /* These dont seem to affect the buttons... */
-    background-color: #4CAF50;
-    color: blue;
+nav#navbar a:hover, nav a:active, nav a.active {
+    background-color: rgba(243, 16, 16, 0.726);
+    color: rgb(0, 32, 27);
 }
 
 
@@ -340,7 +334,7 @@ section#now_showing article div {
     width: 40%;
 }
 
-section#booking_form {
+article#booking_form {
     background-color: rgb(255, 115, 0);
     /* PUT IMAGE HERE */
     font-size: calc(10px + 0.7vw);
@@ -348,12 +342,12 @@ section#booking_form {
     display: none;
 }
 
-section#booking_form h2.booking {
+article#booking_form h2.booking {
     display: inline;
     padding: 0;
 }
 
-section#booking_form div#seating {
+article#booking_form div#seating {
     border: black;
     border-radius: 0%;
     width: 30vw;
@@ -362,13 +356,13 @@ section#booking_form div#seating {
     text-align: center;
 }
 
-section#booking_form div#seating div.wrap {
+article#booking_form div#seating div.wrap {
     border-color: black;
     max-width: auto;
     max-height: auto;
 }
 
-section#booking_form div#cust_details {
+article#booking_form div#cust_details {
     border-color: black;
     border-radius: 0%;
     width: 30vw;
@@ -379,28 +373,28 @@ section#booking_form div#cust_details {
     text-align: center;
 }
 
-section#booking_form div {
+article#booking_form div {
     display: inline-block;
     text-align: center;
 }
 
-section#booking_form select,
-section#booking_form input {
+article#booking_form select,
+article#booking_form input {
     float: right;
     width: 10vw;
     height: 1.5vw;
     max-height: 20px;
 }
 
-section#booking_form label {
+article#booking_form label {
     text-align: right;
 }
 
-section#booking_form input.submit {
+article#booking_form input.submit {
     float: none;
 }
 
-section#booking_form p.error {
+article#booking_form p.error {
     color: red;
     margin: 0;
     font-family: "Arial", Times, serif;

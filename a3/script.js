@@ -5,8 +5,29 @@ var movie = {
     "ANM": ["er", "eue"],
     "AHF": ["eye, eie"]
 };
-
 var moviePanels = ["ATN", "RMC", "ANM", "AHF"];
+
+window.onscroll = function() {
+    var sections = document.getElementsByTagName('main')[0].getElementsByTagName('section');
+
+    var navLinks = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
+
+    let n = -1;
+    while(n < sections.length - 1 && sections[n + 1].offsetTop <= window.scrollY + 5) {
+        n++;
+    }
+
+    for(let a = 0; a < navLinks.length; a++) {
+        navLinks[a].classList.remove("active");
+    }
+    this.console.log(sections);
+    this.console.log(navLinks);
+    console.log(n + "  "+ navLinks[n]);
+
+    if(n >= 0) {
+        navLinks[n].classList.add("active");
+    }
+}
 
 // <------------------------------------------------------------------------ DISPLAY SYNOPSIS ------------------------------------------------------------------->
 
@@ -31,8 +52,9 @@ function updateForm(movieGenre, timeID) {
 
     document.getElementById("booking_title").innerHTML = movie[movieGenre].name + " - " + movie[movieGenre].times[timeID];
     document.getElementById("movie-id").value = movieGenre;
-    document.getElementById("movie-day").value = movie[movieGenre].times[timeID].substr(0, movie[movieGenre].times[timeID].indexOf(' '));
-    document.getElementById("movie-hour").value = movie[movieGenre].times[timeID].substr(movie[movieGenre].times[timeID].indexOf(' '), movie[movieGenre].times[timeID].length);
+    var daytime = document.getElementById("movie-day").value = movie[movieGenre].times[timeID].split(" ");
+    document.getElementById("movie-day").value = daytime[0];
+    document.getElementById("movie-hour").value = daytime[1].trim();
 
     var time = movie[movieGenre].times[timeID];
     if (time.includes("Monday") || time.includes("Wednesday") || time.includes("12:00PM")) {

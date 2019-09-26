@@ -189,10 +189,10 @@
                         <iframe src="https://www.youtube.com/embed/TcMBFSGVi1c"></iframe>
                         <span class="title">Make a booking:</span>
                         <button type="button" onclick='updateForm("ACT", 0)'>Wednesday - 9PM</button>
-                        <button type="button">Thursday - 9PM</button>
-                        <button type="button">Friday - 9PM</button>
-                        <button type="button">Saturday - 6PM</button>
-                        <button type="button">Sunday - 6PM</button>
+                        <button type="button" onclick='updateForm("ACT", 1)'>Thursday - 9PM</button>
+                        <button type="button" onclick='updateForm("ACT", 2)'>Friday - 9PM</button>
+                        <button type="button" onclick='updateForm("ACT", 3)'>Saturday - 6PM</button>
+                        <button type="button" onclick='updateForm("ACT", 4)'>Sunday - 6PM</button>
                     </article>
 
                     <article id="synopsisRMC">
@@ -203,10 +203,10 @@
                         </div>
                         <iframe src="https://www.youtube.com/embed/j5ZXCCM-IVo"></iframe>
                         <span class="title">Make a booking:</span>
-                        <button type="button">Monday - 6PM</button>
-                        <button type="button">Tuesday - 6PM</button>
-                        <button type="button">Saturday - 3PM</button>
-                        <button type="button">Sunday - 3PM</button>
+                        <button type="button" onclick='updateForm("RMC", 0)'>Monday - 6PM</button>
+                        <button type="button" onclick='updateForm("RMC", 1)'>Tuesday - 6PM</button>
+                        <button type="button" onclick='updateForm("RMC", 2)'>Saturday - 3PM</button>
+                        <button type="button" onclick='updateForm("RMC", 3)'>Sunday - 3PM</button>
                     </article>
 
                     <article id="synopsisANM">
@@ -216,14 +216,14 @@
                             <p>A young circus elephant is born with comically large ears and given the cruel nickname Dumbo. One day at a show, he is taunted by a group of kids, inciting his mother into a rage that gets her locked up. After Dumbo's ears cause an accident that injures many of the other elephants, he is made to dress like a clown and perform dangerous stunts. Everything changes when Dumbo discovers that his enormous ears actually allow him to fly, and he astounds everyone at the circus with his new talent.</p>
                         </div>
                         <iframe src="https://www.youtube.com/embed/7NiYVoqBt-8"></iframe>
-                        <span class="title">Make a booking:</span>
-                        <button type="button">Monday - 12PM</button>
-                        <button type="button">Tuesday - 12PM</button>
-                        <button type="button">Wednesday - 6PM</button>
-                        <button type="button">Thursday - 6PM</button>
-                        <button type="button">Friday - 6PM</button>
-                        <button type="button">Saturday - 12PM</button>
-                        <button type="button">Sunday - 12PM</button>
+                        <span class="title" onclick='updateForm("ANM", 4)'>Make a booking:</span>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Monday - 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Tuesday - 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Wednesday - 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Thursday - 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Friday - 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Saturday - 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Sunday - 12PM</button>
                     </article>
 
                     <article id="synopsisAHF">
@@ -242,7 +242,7 @@
                 </header>
             </section>
 
-            <section id="booking_form">
+            <article id="booking_form">
                 <form id="booking" action="https://titan.csit.rmit.edu.au/~e54061/wp/lunardo-formtest.php" onsubmit="return validateForm()" method="post">
                     <h2 id="booking_title">Default Movie Title</h2>
                     
@@ -308,7 +308,7 @@
                     </div>
                     <div id="cust_details">
                         <label for="cust-name">Name</label>
-                        <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" onkeydown="checkName()">
+                        <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" oninput="checkName()">
                         <br>   
                         <p class="error" id="name-invalid">Please enter a valid name!</p>          
                         <label for="cust-email">Email</label>
@@ -316,20 +316,20 @@
                         <br>
 						<br> 
                         <label for="cust-mobile">Mobile</label>
-                        <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" onkeydown="checkMobile()">
+                        <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" oninput="checkMobile()">
                         <br>
 						<p class="error" id="name-invalid">Please enter a valid mobile!</p>  
                         <label for="cust-card">Credit Card</label>
-                        <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" onkeydown="checkCard()">
+                        <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" oninput="checkCard()">
                         <br>
 						<p class="error" id="name-invalid">Please enter a valid card number!</p>  
                         <label for="cust-expiry">Expiry</label>
-                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" onkeydown="checkExpiry()">
+                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" oninput="checkExpiry()">
                     </div>
                     <input id="submit" type="submit" value="Submit">
                     <h2 id="total">Total: $0.00</h2>
                 </form>
-            </section>
+                </article>
 
         </main>
 
