@@ -1,11 +1,11 @@
 /* Insert your javascript here */
 var movie = {
     "ACT": { "name": "Avengers: Endgame", "times": ["Wednesday 9:00PM", "Thursday 9:00PM", "Friday 9:00PM", "Saturday 6:00PM", "Sunday 6:00PM"] },
-    "RMC": ["e", "e"],
-    "ANM": ["er", "eue"],
-    "AHF": ["eye, eie"]
+    "RMC": { "name": "Top End Wedding", "times": ["Monday 6:00PM", "Tuesday 6:00PM", "Saturday 3:00PM", "Sunday 3:00PM"] },
+    "ANM": { "name": "Dumbo", "times": ["Monday 12:00PM", "Tuesday 12:00PM", "Wednesday 6:00PM", "Thursday 6:00PM", "Friday 6:00PM", "Saturday 12:00PM", "Sunday 12:00PM"] },
+    "AHF": { "name": "The Happy Prince", "times": ["Wednesday 12:00PM", "Thursday 12:00PM", "Friday 12:00PM", "Saturday 9:00PM", "Sunday 9:00PM"] }
 };
-var moviePanels = ["ATN", "RMC", "ANM", "AHF"];
+var moviePanels = ["ACT", "RMC", "ANM", "AHF"];
 
 window.onscroll = function() {
     var sections = document.getElementsByTagName('main')[0].getElementsByTagName('section');
@@ -13,18 +13,15 @@ window.onscroll = function() {
     var navLinks = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
 
     let n = -1;
-    while(n < sections.length - 1 && sections[n + 1].offsetTop <= window.scrollY + 5) {
+    while (n < sections.length - 1 && sections[n + 1].offsetTop <= window.scrollY + 5) {
         n++;
     }
 
-    for(let a = 0; a < navLinks.length; a++) {
+    for (let a = 0; a < navLinks.length; a++) {
         navLinks[a].classList.remove("active");
     }
-    this.console.log(sections);
-    this.console.log(navLinks);
-    console.log(n + "  "+ navLinks[n]);
 
-    if(n >= 0) {
+    if (n >= 0) {
         navLinks[n].classList.add("active");
     }
 }
@@ -100,7 +97,7 @@ function calculate() {
 
 function checkName() {
     var name = document.getElementById("cust-name").value;
-    if (name.match("^[a-z ,.'-]+$")) {
+    if (name.match("^[a-zA-Z \-.']{1,100}$")) {
         document.getElementById("name-invalid").style.visibility = "hidden"
         return true;
     } else {
@@ -113,17 +110,24 @@ function checkEmail() {}
 
 function checkMobile() {
     var mobile = document.getElementById("cust-mobile").value;
-    return mobile.match("jim") ? true : false;
+    if (mobile.match("")) {
+        document.getElementById("mobile-invalid").style.visibility = "hidden"
+        return true;
+    } else {
+        document.getElementById("mobile-invalid").style.visibility = "visible";
+        return false;
+    }
 }
 
 function checkCard() {
     var card = document.getElementById("cust-card").value;
-    return card.match("100") ? true : false;
-}
-
-function nameValid(check) {
-    check ? document.getElementById("name-invalid").style.visibility = "hidden" : document.getElementById("name-invalid").style.visibility = "visible";
-    return check;
+    if (card.match("^5[1-5][0-9]{0,14}|^(222[1-9]|2[3-6]\\d{2}|27[0-1]\\d|2720)[0-9]{0,12}$")) {
+        document.getElementById("card-invalid").style.visibility = "hidden"
+        return true;
+    } else {
+        document.getElementById("card-invalid").style.visibility = "visible";
+        return false;
+    }
 }
 
 function validateForm() {

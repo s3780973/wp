@@ -92,8 +92,10 @@ nav#navbar a {
     font-size: calc(14px + 0.6vw);
 }
 
-nav#navbar a:hover, nav a:active, nav a.active {
-    background-color: rgba(243, 16, 16, 0.726);
+nav#navbar a:hover,
+nav a:active,
+nav a.active {
+    background-color: rgba(228, 117, 238, 0.726);
     color: rgb(0, 32, 27);
 }
 
@@ -236,7 +238,8 @@ section#now_showing {
 }
 
 section#now_showing header {
-    background: hsla(32, 84%, 55%, 0.75);
+    /* background: hsla(32, 84%, 55%, 0.75); */
+    background: hsla(330, 95%, 59%, 0.75);
 }
 
 section#now_showing div.movie {
@@ -280,7 +283,7 @@ section#now_showing article {
     border-style: solid;
     text-align: left;
     display: inline-block;
-    background-color: rgba(219, 216, 22, 0.45);
+    background: hsla(192, 100%, 50%, 0.5);
 }
 
 section#now_showing div.synopsis {
@@ -335,11 +338,31 @@ section#now_showing article div {
 }
 
 article#booking_form {
-    background-color: rgb(255, 115, 0);
     /* PUT IMAGE HERE */
     font-size: calc(10px + 0.7vw);
-    height: auto;
     display: none;
+    background-image: url("../../media/movie-posters.png");
+    background-attachment: fixed;
+    margin: auto;
+    background-size: cover;
+    border: 0.35vw black solid;
+    border-bottom-width: 0px;
+    /* height: 100vh; */
+}
+
+article#booking_form form {
+    /* background: rgba(41, 179, 144, 0.8); */
+    background: hsla(207, 93%, 48%, 0.85);
+    background-color: rgba(165, 70, 209, 0.8);
+    display: table-cell;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+article#booking_form div {
+    display: inline-block;
+    text-align: center;
 }
 
 article#booking_form h2.booking {
@@ -350,44 +373,53 @@ article#booking_form h2.booking {
 article#booking_form div#seating {
     border: black;
     border-radius: 0%;
-    width: 30vw;
-    height: 30vw;
     display: inline-block;
     text-align: center;
+    width: 34.25vw;
+    /* height: calc(150px + 8vw); */
 }
 
 article#booking_form div#seating div.wrap {
     border-color: black;
-    max-width: auto;
-    max-height: auto;
+    /* width: calc(290px + 12vw); */
+    height: calc(120px + 4vw);
+    border: 0.35vw black solid;
+    display: inline-block;
+    text-align: right;
+    background-color: rgba(212, 0, 255, 0.6);
+    line-height: calc(10px + 2vw);
 }
 
 article#booking_form div#cust_details {
     border-color: black;
-    border-radius: 0%;
-    width: 30vw;
-    height: 30vw;
+    border: 0.35vw black solid;
     display: inline-block;
-    width: calc(290px + 12vw);
-    height: calc(250px + 10vw);
-    text-align: center;
-}
-
-article#booking_form div {
-    display: inline-block;
-    text-align: center;
+    width: 34.25vw;
+    height: calc(220px + 10vw);
+    text-align: right;
+    background-color: rgba(212, 0, 255, 0.6);
 }
 
 article#booking_form select,
 article#booking_form input {
     float: right;
-    width: 10vw;
-    height: 1.5vw;
+    height: calc(10px + 2vw);
     max-height: 20px;
+    padding-top: 5px;
+}
+
+article#booking_form select {
+    width: 12vw;
+}
+
+article#booking_form input {
+    width: 20vw;
 }
 
 article#booking_form label {
     text-align: right;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 article#booking_form input.submit {
@@ -396,11 +428,14 @@ article#booking_form input.submit {
 
 article#booking_form p.error {
     color: red;
-    margin: 0;
-    font-family: "Arial", Times, serif;
-    font-weight: normal;
+    margin: 10px;
+    font-weight: 900;
     text-align: right;
-    font-size: calc(7px + 0.5vw);
+    font-size: calc(9px + 0.6vw);
+}
+
+article#bookingform h2.total {
+    display: block;
 }
 
 footer {

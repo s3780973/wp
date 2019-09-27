@@ -142,45 +142,45 @@
                         <img src='../../media/avengers-endgame.png' />
                         <p class="title">Avengers: Engame M</p>
                         <p class="times">Times:
-                            <br>Wednesday - 9PM
-                            <br>Thursday - 9PM
-                            <br>Friday - 9PM
-                            <br>Saturday - 6PM
-                            <br>Sunday - 6PM</p>
+                            <br>Wednesday 9PM
+                            <br>Thursday 9PM
+                            <br>Friday 9PM
+                            <br>Saturday 6PM
+                            <br>Sunday 6PM</p>
                     </div>
                     <div class="movie" id="moviePanelRMC" onclick='displaySynopsis(1)'>
                         <img src='../../media/top-end-wedding.png' />
                         <p class="title">Top End Wedding M</p>
                         <p class="times">Times:
-                            <br>Monday - 6PM
-                            <br>Tuesday - 6PM
-                            <br>Saturday - 3PM
-                            <br>Sunday - 3PM</p>
+                            <br>Monday 6PM
+                            <br>Tuesday 6PM
+                            <br>Saturday 3PM
+                            <br>Sunday 3PM</p>
                     </div>
                     <div class="movie" id="moviePanelANM" onclick='displaySynopsis(2)'>
                         <img src='../../media/dumbo.png' />
                         <p class="title">Dumbo PG</p>
                         <p class="times">Times:
-                            <br>Monday - 12PM
-                            <br>Tuesday - 12PM
-                            <br>Wednesday - 6PM
-                            <br>Thursday - 6PM
-                            <br>Friday - 6PM
+                            <br>Monday 12PM
+                            <br>Tuesday 12PM
+                            <br>Wednesday 6PM
+                            <br>Thursday 6PM
+                            <br>Friday 6PM
                             <br>Saturday 12PM
-                            <br>Sunday - 12PM</p>
+                            <br>Sunday 12PM</p>
                     </div>
                     <div class="movie" id="moviePanelAHF" onclick='displaySynopsis(3)'>
                         <img src='../../media/the-happy-prince.png' />
                         <p class="title">The Happy Prince MA</p>
                         <p class="times">Times:
-                            <br>Wednesday - 12PM
-                            <br>Thursday - 12PM
-                            <br>Friday - 12PM
+                            <br>Wednesday 12PM
+                            <br>Thursday 12PM
+                            <br>Friday 12PM
                             <br>Saturday 9PM
-                            <br>Sunday - 9PM</p>
+                            <br>Sunday 9PM</p>
                     </div class="synopsis">
 
-                    <article id="synopsisATN">
+                    <article id="synopsisACT">
                         <h2>The Avengers: Endgame (M)</h2>
                         <div class="synopsis">
                             <p class="title">Plot Description:</p>
@@ -188,11 +188,11 @@
                         </div>
                         <iframe src="https://www.youtube.com/embed/TcMBFSGVi1c"></iframe>
                         <span class="title">Make a booking:</span>
-                        <button type="button" onclick='updateForm("ACT", 0)'>Wednesday - 9PM</button>
-                        <button type="button" onclick='updateForm("ACT", 1)'>Thursday - 9PM</button>
-                        <button type="button" onclick='updateForm("ACT", 2)'>Friday - 9PM</button>
-                        <button type="button" onclick='updateForm("ACT", 3)'>Saturday - 6PM</button>
-                        <button type="button" onclick='updateForm("ACT", 4)'>Sunday - 6PM</button>
+                        <button type="button" onclick='updateForm("ACT", 0)'>Wednesday 9PM</button>
+                        <button type="button" onclick='updateForm("ACT", 1)'>Thursday 9PM</button>
+                        <button type="button" onclick='updateForm("ACT", 2)'>Friday 9PM</button>
+                        <button type="button" onclick='updateForm("ACT", 3)'>Saturday 6PM</button>
+                        <button type="button" onclick='updateForm("ACT", 4)'>Sunday 6PM</button>
                     </article>
 
                     <article id="synopsisRMC">
@@ -203,10 +203,10 @@
                         </div>
                         <iframe src="https://www.youtube.com/embed/j5ZXCCM-IVo"></iframe>
                         <span class="title">Make a booking:</span>
-                        <button type="button" onclick='updateForm("RMC", 0)'>Monday - 6PM</button>
-                        <button type="button" onclick='updateForm("RMC", 1)'>Tuesday - 6PM</button>
-                        <button type="button" onclick='updateForm("RMC", 2)'>Saturday - 3PM</button>
-                        <button type="button" onclick='updateForm("RMC", 3)'>Sunday - 3PM</button>
+                        <button type="button" onclick='updateForm("RMC", 0)'>Monday 6PM</button>
+                        <button type="button" onclick='updateForm("RMC", 1)'>Tuesday 6PM</button>
+                        <button type="button" onclick='updateForm("RMC", 2)'>Saturday 3PM</button>
+                        <button type="button" onclick='updateForm("RMC", 3)'>Sunday 3PM</button>
                     </article>
 
                     <article id="synopsisANM">
@@ -216,14 +216,14 @@
                             <p>A young circus elephant is born with comically large ears and given the cruel nickname Dumbo. One day at a show, he is taunted by a group of kids, inciting his mother into a rage that gets her locked up. After Dumbo's ears cause an accident that injures many of the other elephants, he is made to dress like a clown and perform dangerous stunts. Everything changes when Dumbo discovers that his enormous ears actually allow him to fly, and he astounds everyone at the circus with his new talent.</p>
                         </div>
                         <iframe src="https://www.youtube.com/embed/7NiYVoqBt-8"></iframe>
-                        <span class="title" onclick='updateForm("ANM", 4)'>Make a booking:</span>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Monday - 12PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Tuesday - 12PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Wednesday - 6PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Thursday - 6PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Friday - 6PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Saturday - 12PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Sunday - 12PM</button>
+                        <span class="title" onclick='updateForm("ANM", 0)'>Make a booking:</span>
+                        <button type="button" onclick='updateForm("ANM", 1)'>Monday 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 2)'>Tuesday 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 3)'>Wednesday 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Thursday 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 5)'>Friday 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 6)'>Saturday 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 7)'>Sunday 12PM</button>
                     </article>
 
                     <article id="synopsisAHF">
@@ -234,10 +234,10 @@
                         </div>
                         <iframe src="https://www.youtube.com/embed/4HmN9r1Fcr8"></iframe>
                         <span class="title">Make a booking:</span>
-                        <button type="button">Monday - 6PM</button>
-                        <button type="button">Tuesday - 6PM</button>
-                        <button type="button">Saturday - 3PM</button>
-                        <button type="button">Sunday - 3PM</button>
+                        <button type="button" onclick='updateForm("AHF", 0)'>Monday 6PM</button>
+                        <button type="button" onclick='updateForm("AHF", 1)'>Tuesday 6PM</button>
+                        <button type="button" onclick='updateForm("AHF", 2)'>Saturday 3PM</button>
+                        <button type="button" onclick='updateForm("AHF", 3)'>Sunday 3PM</button>
                     </article>
                 </header>
             </section>
@@ -318,11 +318,11 @@
                         <label for="cust-mobile">Mobile</label>
                         <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" oninput="checkMobile()">
                         <br>
-						<p class="error" id="name-invalid">Please enter a valid mobile!</p>  
+						<p class="error" id="mobile-invalid">Please enter a valid mobile!</p>  
                         <label for="cust-card">Credit Card</label>
                         <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" oninput="checkCard()">
                         <br>
-						<p class="error" id="name-invalid">Please enter a valid card number!</p>  
+						<p class="error" id="card-invalid">Please enter a valid card number!</p>  
                         <label for="cust-expiry">Expiry</label>
                         <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" oninput="checkExpiry()">
                     </div>
