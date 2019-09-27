@@ -310,7 +310,7 @@
                         <label for="cust-name">Name</label>
                         <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" oninput="checkName()">
                         <br>   
-                        <p class="error" id="name-invalid">Please enter a valid name!</p>          
+                        <p class="error" id="name-invalid">Names can include letters a-z, ( ' ), ( _ ) or ( - )</p>          
                         <label for="cust-email">Email</label>
                         <input id="cust-email" name="cust[email]" type="email" placeholder="Enter email" >
                         <br>
@@ -324,9 +324,9 @@
                         <br>
 						<p class="error" id="card-invalid">Please enter a valid card number!</p>  
                         <label for="cust-expiry">Expiry</label>
-                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" oninput="checkExpiry()">
+                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" onclick="getMinDate()">
                     </div>
-                    <input id="submit" type="submit" value="Submit">
+                    <input id="submit_button" type="submit" value="Submit">
                     <h2 id="total">Total: $0.00</h2>
                 </form>
                 </article>

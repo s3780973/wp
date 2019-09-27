@@ -31,7 +31,7 @@ window.onscroll = function() {
 // <------------------------------------------ DISPLAY SYNOPSIS -------------------------------------------->
 
 function displaySynopsis(movie) {
-    for (var i = 0; i < moviePanels.length; i++) {
+    for (let i = 0; i < moviePanels.length; i++) {
         if (i != movie) {
             document.getElementById("synopsis" + moviePanels[i]).style.display = "none";
         } else {
@@ -42,6 +42,13 @@ function displaySynopsis(movie) {
 }
 
 // <-------------------------------------------- BOOKING FORM ---------------------------------------------->
+
+/** Generate options in select box (Args: amount) */
+function genOptions(amount) {
+    for (let i = 1; i <= amount; i++) {
+        document.write("<option value='" + i + "'>" + i + "</option>");
+    }
+}
 
 var discount = false;
 
@@ -65,33 +72,13 @@ function updateForm(movieGenre, timeID) {
     calculate();
 }
 
-function genOptions(amount) {
-    for (var i = 1; i <= amount; i++) {
-        document.write("<option value='" + i + "'>" + i + "</option>");
-    }
-}
-
 function calculate() {
-    var numSTA = parseInt(document.getElementById("seats-STA").value);
-    var numSTP = parseInt(document.getElementById("seats-STP").value);
-    var numSTC = parseInt(document.getElementById("seats-STC").value);
-    var numFCA = parseInt(document.getElementById("seats-FCA").value);
-    var numFCP = parseInt(document.getElementById("seats-FCP").value);
-    var numFCC = parseInt(document.getElementById("seats-FCC").value);
-
-    var priceSTA = discount ? 14.00 : 19.80;
-    var priceSTP = discount ? 12.50 : 17.50;
-    var priceSTC = discount ? 11.00 : 15.30;
-    var priceFCA = discount ? 24.00 : 30.00;
-    var priceFCP = discount ? 22.50 : 27.00;
-    var priceFCC = discount ? 21.00 : 24.00;
-
-    var totalSTA = numSTA * priceSTA;
-    var totalSTP = numSTP * priceSTP;
-    var totalSTC = numSTC * priceSTC;
-    var totalFCA = numFCA * priceFCA;
-    var totalFCP = numFCP * priceFCP;
-    var totalFCC = numFCC * priceFCC;
+    var totalSTA = (document.getElementById("seats-STA").value) * (discount ? 14.00 : 19.80);
+    var totalSTP = (document.getElementById("seats-STP").value) * (discount ? 12.50 : 17.50);
+    var totalSTC = (document.getElementById("seats-STC").value) * (discount ? 11.00 : 15.30);
+    var totalFCA = (document.getElementById("seats-FCA").value) * (discount ? 24.00 : 30.00);
+    var totalFCP = (document.getElementById("seats-FCP").value) * (discount ? 22.50 : 27.00);
+    var totalFCC = (document.getElementById("seats-FCC").value) * (discount ? 21.00 : 24.00);
 
     var total = totalSTA + totalSTP + totalSTC + totalFCA + totalFCP + totalFCC;
     document.getElementById("total").innerHTML = "Total: $" + total.toFixed(2);
@@ -132,6 +119,17 @@ function checkCard() {
         document.getElementById("card-invalid").style.visibility = "visible";
         return false;
     }
+}
+
+function getMinDate() {
+    let today = new Date(),
+        month = "0" + (today.getMonth() + 1), //January is 0
+        year = today.getFullYear();
+
+    let date = year + "-" + month;
+
+    document.getElementById("cust-expiry").setAttribute("min", date);
+    document.getElementById("cust-expiry").setAttribute("value", date);
 }
 
 function validateForm() {
