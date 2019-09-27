@@ -216,14 +216,14 @@
                             <p>A young circus elephant is born with comically large ears and given the cruel nickname Dumbo. One day at a show, he is taunted by a group of kids, inciting his mother into a rage that gets her locked up. After Dumbo's ears cause an accident that injures many of the other elephants, he is made to dress like a clown and perform dangerous stunts. Everything changes when Dumbo discovers that his enormous ears actually allow him to fly, and he astounds everyone at the circus with his new talent.</p>
                         </div>
                         <iframe src="https://www.youtube.com/embed/7NiYVoqBt-8"></iframe>
-                        <span class="title" onclick='updateForm("ANM", 0)'>Make a booking:</span>
-                        <button type="button" onclick='updateForm("ANM", 1)'>Monday 12PM</button>
-                        <button type="button" onclick='updateForm("ANM", 2)'>Tuesday 12PM</button>
-                        <button type="button" onclick='updateForm("ANM", 3)'>Wednesday 6PM</button>
-                        <button type="button" onclick='updateForm("ANM", 4)'>Thursday 6PM</button>
-                        <button type="button" onclick='updateForm("ANM", 5)'>Friday 6PM</button>
-                        <button type="button" onclick='updateForm("ANM", 6)'>Saturday 12PM</button>
-                        <button type="button" onclick='updateForm("ANM", 7)'>Sunday 12PM</button>
+                        <span class="title">Make a booking:</span>
+                        <button type="button" onclick='updateForm("ANM", 0)'>Monday 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 1)'>Tuesday 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 2)'>Wednesday 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 3)'>Thursday 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 4)'>Friday 6PM</button>
+                        <button type="button" onclick='updateForm("ANM", 5)'>Saturday 12PM</button>
+                        <button type="button" onclick='updateForm("ANM", 6)'>Sunday 12PM</button>
                     </article>
 
                     <article id="synopsisAHF">

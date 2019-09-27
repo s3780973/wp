@@ -1,11 +1,13 @@
 /* Insert your javascript here */
 var movie = {
-    "ACT": { "name": "Avengers: Endgame", "times": ["Wednesday 9:00PM", "Thursday 9:00PM", "Friday 9:00PM", "Saturday 6:00PM", "Sunday 6:00PM"] },
-    "RMC": { "name": "Top End Wedding", "times": ["Monday 6:00PM", "Tuesday 6:00PM", "Saturday 3:00PM", "Sunday 3:00PM"] },
-    "ANM": { "name": "Dumbo", "times": ["Monday 12:00PM", "Tuesday 12:00PM", "Wednesday 6:00PM", "Thursday 6:00PM", "Friday 6:00PM", "Saturday 12:00PM", "Sunday 12:00PM"] },
-    "AHF": { "name": "The Happy Prince", "times": ["Wednesday 12:00PM", "Thursday 12:00PM", "Friday 12:00PM", "Saturday 9:00PM", "Sunday 9:00PM"] }
+    "ACT": { "name": "Avengers: Endgame", "times": ["Wednesday 9:00PM", "Thursday 9:00PM", "Friday 9:00PM", "Saturday 6:00PM", "Sunday 6:00PM"], "time_codes": ["WED T21", "THU T21", "FRI T21", "SAT T18", "SUN T18"] },
+    "RMC": { "name": "Top End Wedding", "times": ["Monday 6:00PM", "Tuesday 6:00PM", "Saturday 3:00PM", "Sunday 3:00PM"], "time_codes": ["MON T18", "TUE T18", "SAT T15", "SUN T15"] },
+    "ANM": { "name": "Dumbo", "times": ["Monday 12:00PM", "Tuesday 12:00PM", "Wednesday 6:00PM", "Thursday 6:00PM", "Friday 6:00PM", "Saturday 12:00PM", "Sunday 12:00PM"], "time_codes": ["MON T12", "TUE T12", "WED T18", "THU T18", "FRI T18", "SAT T12", "SUN T12"] },
+    "AHF": { "name": "The Happy Prince", "times": ["Wednesday 12:00PM", "Thursday 12:00PM", "Friday 12:00PM", "Saturday 9:00PM", "Sunday 9:00PM"], "time_codes": ["WED T12", "THU T12", "FRI T12", "SAT T21", "SUN T21"] }
 };
 var moviePanels = ["ACT", "RMC", "ANM", "AHF"];
+
+// <--------------------------------------------- SCROLL PANE --------------------------------------------->
 
 window.onscroll = function() {
     var sections = document.getElementsByTagName('main')[0].getElementsByTagName('section');
@@ -26,7 +28,7 @@ window.onscroll = function() {
     }
 }
 
-// <------------------------------------------------------------------------ DISPLAY SYNOPSIS ------------------------------------------------------------------->
+// <------------------------------------------ DISPLAY SYNOPSIS -------------------------------------------->
 
 function displaySynopsis(movie) {
     for (var i = 0; i < moviePanels.length; i++) {
@@ -39,7 +41,7 @@ function displaySynopsis(movie) {
     }
 }
 
-// <-------------------------------------------------------------------------- BOOKING FORM --------------------------------------------------------------------->
+// <-------------------------------------------- BOOKING FORM ---------------------------------------------->
 
 var discount = false;
 
@@ -49,12 +51,14 @@ function updateForm(movieGenre, timeID) {
 
     document.getElementById("booking_title").innerHTML = movie[movieGenre].name + " - " + movie[movieGenre].times[timeID];
     document.getElementById("movie-id").value = movieGenre;
-    var daytime = document.getElementById("movie-day").value = movie[movieGenre].times[timeID].split(" ");
+
+    var daytime = document.getElementById("movie-day").value = movie[movieGenre].time_codes[timeID].split(" ");
+
     document.getElementById("movie-day").value = daytime[0];
     document.getElementById("movie-hour").value = daytime[1].trim();
 
-    var time = movie[movieGenre].times[timeID];
-    if (time.includes("Monday") || time.includes("Wednesday") || time.includes("12:00PM")) {
+    var time = movie[movieGenre].time_codes[timeID];
+    if (time.includes("MON") || time.includes("WED") || time.includes("T12")) {
         discount = true;
     } else discount = false;
 
@@ -110,7 +114,7 @@ function checkEmail() {}
 
 function checkMobile() {
     var mobile = document.getElementById("cust-mobile").value;
-    if (mobile.match("")) {
+    if (mobile.match("^(\\(04\\)|04|\\+614)( ?\\d){8}$")) {
         document.getElementById("mobile-invalid").style.visibility = "hidden"
         return true;
     } else {
@@ -120,8 +124,8 @@ function checkMobile() {
 }
 
 function checkCard() {
-    var card = document.getElementById("cust-card").value;
-    if (card.match("^5[1-5][0-9]{0,14}|^(222[1-9]|2[3-6]\\d{2}|27[0-1]\\d|2720)[0-9]{0,12}$")) {
+    var card = document.getElementById("cust-card").value; //
+    if (card.match("^(?:4\\d{3}|5[1-5]\\d{2}|6011|3[47]\\d{2})([- ]?)\\d{4}\\1\\d{4}\\1\\d{4}$")) {
         document.getElementById("card-invalid").style.visibility = "hidden"
         return true;
     } else {

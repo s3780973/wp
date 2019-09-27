@@ -353,7 +353,7 @@ article#booking_form {
 article#booking_form form {
     /* background: rgba(41, 179, 144, 0.8); */
     background: hsla(207, 93%, 48%, 0.85);
-    background-color: rgba(165, 70, 209, 0.8);
+    background-color: rgba(165, 70, 209, 0.9);
     display: table-cell;
     text-align: center;
     width: 100%;
@@ -405,7 +405,6 @@ article#booking_form input {
     float: right;
     height: calc(10px + 2vw);
     max-height: 20px;
-    padding-top: 5px;
 }
 
 article#booking_form select {
@@ -422,20 +421,22 @@ article#booking_form label {
     padding-right: 2vw;
 }
 
-article#booking_form input.submit {
-    float: none;
-}
-
 article#booking_form p.error {
-    color: red;
+    color: rgb(161, 17, 17);
     margin: 10px;
     font-weight: 900;
     text-align: right;
-    font-size: calc(9px + 0.6vw);
+    font-size: calc(5px + 0.7vw);
 }
 
 article#bookingform h2.total {
     display: block;
+}
+
+article#booking_form input.submit {
+    float: right;
+    width: 10vw;
+    height: 7vw;
 }
 
 footer {
