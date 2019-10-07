@@ -423,7 +423,7 @@ article#booking_form label {
 }
 
 article#booking_form p.error {
-    color: rgb(88, 7, 7);
+    color: rgb(124, 14, 14);
     margin: 10px;
     font-weight: 900;
     text-align: right;
@@ -446,6 +446,40 @@ footer {
     border: 0.35vw black solid;
 }
 
-article#Website-Under-Construction {
-    display: none;
+pre {
+    background: black;
+    color: green;
+}
+
+
+/* <------------------------------------------------- RECEIPT PAGE CSS -------------------------------------------------------> */
+
+section#info {
+    background: white;
+}
+
+section#tickets {
+    background: pink;
+    text-align: center;
+}
+
+div.ticket {
+    margin: 0;
+    border-radius: 0;
+    border: 0.5vw rgb(175, 105, 24) groove;
+    width: calc(200px + 20vw);
+    height: calc(75px + 7vw);
+    display: inline-block;
+    background: wheat;
+    text-align: left;
+}
+
+div.ticket h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: calc(10px + 1vw);
+}
+
+div.ticket p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: calc(8px + 0.7vw);
 }

@@ -2,21 +2,21 @@
 include_once('tools.php');
 //check if form has been submitted
 
-$errorCount = 0;
-
 $name = "";
 $email = "";
 $mobile = "";
 $card = "";
 $expiry = "";
 
-$errors = [
+$errors = [ //SET INITIAL TO FALSE
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
-    "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
-    "mobile" => ["valid" => false, "message" => "Mobile invalid!"],
-    "card" => ["valid" => false, "message" => "card invalid!"],
-    "expiry" => ["valid" => false, "message" => "expiry invalid!"]
+    "email" => ["valid" => true, "message" => "Emails must be in the format example@email.com"],
+    "mobile" => ["valid" => true, "message" => "Mobile invalid!"],
+    "card" => ["valid" => true, "message" => "card invalid!"],
+    "expiry" => ["valid" => true, "message" => "expiry invalid!"]
 ];
+
+$errorCount = 0;
 
 if(!empty($_POST)) {
     
@@ -25,29 +25,39 @@ if(!empty($_POST)) {
         $errors["name"]["valid"] = checkName($name);
     }
 
-    if(!empty($_POST['cust']['name'])) {
-        $name = $_POST["cust"]['name'];
-        $errors["name"]["valid"] = checkName($name);
+    if(!empty($_POST['cust']['email'])) {
+        $email = $_POST["cust"]['email'];
+        $errors["email"]["valid"] = checkName($name);
     }
 
-    if(!empty($_POST['cust']['name'])) {
-        $name = $_POST["cust"]['name'];
-        $errors["name"]["valid"] = checkName($name);
+    if(!empty($_POST['cust']['mobile'])) {
+        $mobile = $_POST["cust"]['mobile'];
+        $errors["mobile"]["valid"] = checkName($name);
     }
 
-    if(!empty($_POST['cust']['name'])) {
-        $name = $_POST["cust"]['name'];
-        $errors["name"]["valid"] = checkName($name);
+    if(!empty($_POST['cust']['card'])) {
+        $card = $_POST["cust"]['card'];
+        $errors["card"]["valid"] = checkName($name);
     }
 
-    if(!empty($_POST['cust']['name'])) {
-        $name = $_POST["cust"]['name'];
-        $errors["name"]["valid"] = checkName($name);
+    if(!empty($_POST['cust']['expiry'])) {
+        $expiry = $_POST["cust"]['expiry'];
+        $errors["expiry"]["valid"] = checkName($name);
+    }
+    echo "THERE IS DATA!";
+    
+    //Check for errors, then increment the error count
+    foreach($errors as $item) {
+        if(!$item["valid"]) $errorCount++;
     }
 
-    //If no errors, submit form!
-    if(errorCount === 0) {
+    echo $errorCount;
 
+    //If no errors, submit and redirect to ticket page
+    if($errorCount == 0) {
+        $_SESSION["cart"] = $_POST;
+        header("Location: receipt.php");
+        //fputcsv
     }
 }
 
@@ -59,7 +69,7 @@ if(!empty($_POST)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Assignment 2</title>
+    <title>Assignment 4</title>
 
     <!-- Keep wireframe.css for debugging, add your css to style.css -->
     <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
@@ -364,25 +374,25 @@ if(!empty($_POST)) {
                     </div>
                     <div id="cust_details">
                         <label for="cust-name">Name</label>
-                        <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" value="<?php echo isset($_POST["cust"]["name"]) ? $_POST["cust"]["name"] : ""; ?>" oninput="checkName()">
+                        <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" value="<?php echo isset($_POST["cust"]["name"]) ? $_POST["cust"]["name"] : ""; ?>">
                         <br>   
-                        <p class="error" id="name-invalid">Names can include letters a-z, ( ' ), ( _ ) or ( - )</p>          
+                        <p class="error" id="name-invalid"><?php echo $errors["name"]["valid"] ? "" : $errors["name"]["message"] ?></p>          
                         <label for="cust-email">Email</label>
-                        <input id="cust-email" name="cust[email]" type="email" placeholder="Enter email" >
+                        <input id="cust-email" name="cust[email]" type="email" placeholder="Enter email" value="<?php echo isset($_POST["cust"]["email"]) ? $_POST["cust"]["email"] : ""; ?>">
                         <br>
 						<br> 
                         <label for="cust-mobile">Mobile</label>
-                        <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" oninput="checkMobile()">
+                        <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" value="<?php echo isset($_POST["cust"]["mobile"]) ? $_POST["cust"]["mobile"] : ""; ?>" oninput="checkMobile()">
                         <br>
 						<p class="error" id="mobile-invalid">Please enter a valid mobile!</p>  
                         <label for="cust-card">Credit Card</label>
-                        <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" oninput="checkCard()">
+                        <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" value="<?php echo isset($_POST["cust"]["card"]) ? $_POST["cust"]["card"] : ""; ?>" oninput="checkCard()">
                         <br>
 						<p class="error" id="card-invalid">Please enter a valid card number!</p>  
                         <label for="cust-expiry">Expiry</label>
-                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" onclick="getMinDate()">
+                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" value="<?php echo isset($_POST["cust"]["expiry"]) ? $_POST["cust"]["expiry"] : ""; ?>" onclick="getMinDate()">
                     </div>
-                    <input id="submit_button" type="submit" name="form" value="Submit">
+                    <input id="submit_button" type="submit" value="Submit">
                     <h2 id="total">Total: $0.00</h2>
                 </form>
                 </article>
@@ -403,7 +413,9 @@ if(!empty($_POST)) {
         </footer>
 
         <?php
-            printMyCode();
+        preShow($_POST);
+        preShow($_SESSION);
+        printMyCode();
         ?>
     </div>
 </body>
