@@ -15,11 +15,11 @@ function checkName($name) {
 }
 
 function checkEmail($email) {
-
+  return filter_var($email, FILTER_VALIDATE_EMAIL) ? true: false;
 }
 
 function checkMobile($mobile) {
-
+  return preg_match("/^(\(04\)|04|\+614)( ?\d){8}$/", $mobile) ? true : false;
 }
 
 function checkCard($card) {
@@ -27,7 +27,21 @@ function checkCard($card) {
 }
 
 function checkExpiry($expiry) {
-  
+  return strtotime($expiry) > strtotime(date("Y-m"), "+1 Months") ? true : false;
+}
+
+function calculate() {
+  $discount = true;
+  $totalSTA = ($_POST['seats']['STA']) * ($discount ? 14.00 : 19.80);
+  $totalSTP = ($_POST['seats']['STP']) * ($discount ? 12.50 : 17.50);
+  $totalSTC = ($_POST['seats']['STC']) * ($discount ? 11.00 : 15.30);
+  $totalFCA = ($_POST['seats']['FCA']) * ($discount ? 24.00 : 30.00);
+  $totalFCP = ($_POST['seats']['FCP']) * ($discount ? 22.50 : 27.00);
+  $totalFCC = ($_POST['seats']['FCC']) * ($discount ? 21.00 : 24.00);
+
+  $total = $totalSTA + $totalSTP + $totalSTC + $totalFCA + $totalFCP + $totalFCC;
+  //document.getElementById("total").innerHTML = "Total: $" + total.toFixed(2);
+  return $total;
 }
 
 /** Can only be called after $_SESSION is initialised */

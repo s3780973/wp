@@ -8,12 +8,15 @@ $mobile = "";
 $card = "";
 $expiry = "";
 
+$totalPrice = 0;
+
 $errors = [ //SET INITIAL TO FALSE
+    "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
-    "email" => ["valid" => true, "message" => "Emails must be in the format example@email.com"],
-    "mobile" => ["valid" => true, "message" => "Mobile invalid!"],
+    "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
+    "mobile" => ["valid" => false, "message" => "Mobile invalid!"],
     "card" => ["valid" => true, "message" => "card invalid!"],
-    "expiry" => ["valid" => true, "message" => "expiry invalid!"]
+    "expiry" => ["valid" => false, "message" => "expiry invalid!"]
 ];
 
 $errorCount = 0;
@@ -27,12 +30,12 @@ if(!empty($_POST)) {
 
     if(!empty($_POST['cust']['email'])) {
         $email = $_POST["cust"]['email'];
-        $errors["email"]["valid"] = checkName($name);
+        $errors["email"]["valid"] = checkEmail($email);
     }
 
     if(!empty($_POST['cust']['mobile'])) {
         $mobile = $_POST["cust"]['mobile'];
-        $errors["mobile"]["valid"] = checkName($name);
+        $errors["mobile"]["valid"] = checkMobile($mobile);
     }
 
     if(!empty($_POST['cust']['card'])) {
@@ -42,16 +45,20 @@ if(!empty($_POST)) {
 
     if(!empty($_POST['cust']['expiry'])) {
         $expiry = $_POST["cust"]['expiry'];
-        $errors["expiry"]["valid"] = checkName($name);
+        $errors["expiry"]["valid"] = checkExpiry($expiry);
     }
-    echo "THERE IS DATA!";
+
+    if(!empty($_POST['seats'])) {
+        $totalPrice = calculate();
+        $errors["totalPrice"]["valid"] = $totalPrice > 0 ? true : false;
+    }
     
     //Check for errors, then increment the error count
     foreach($errors as $item) {
         if(!$item["valid"]) $errorCount++;
     }
 
-    echo $errorCount;
+    echo "ERROR COUNT: ".$errorCount;
 
     //If no errors, submit and redirect to ticket page
     if($errorCount == 0) {
@@ -320,7 +327,7 @@ if(!empty($_POST)) {
                     <h2>Standard Seating</h2>
                         <div class="wrap">
                             <label for="seats-STA">Adults</label>
-                            <select id="seats-STA" name="seats[STA]" onchange="calculate()">
+                            <select id="seats-STA" name="seats[STA]" value="<?php echo isset($_POST["seats"]["STA"]) ? $_POST["seats"]["STA"] : 0; ?>" onchange="calculate()">
                                 <option value=0>Please select</option>
                                 <script>
                                     genOptions(10);
