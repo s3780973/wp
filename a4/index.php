@@ -11,6 +11,7 @@ $expiry = "";
 $totalPrice = 0;
 
 $errors = [ //SET INITIAL TO FALSE
+    "movieID" => ["valid" => false, "message" => "Stop trying to hack the movie ID!"],
     "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
     "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
@@ -22,7 +23,7 @@ $errors = [ //SET INITIAL TO FALSE
 $errorCount = 0;
 
 if(!empty($_POST)) {
-    
+    echo("DISCOUNT? ".discount($_POST));
     if(!empty($_POST['cust']['name'])) {
         $name = $_POST["cust"]['name'];
         $errors["name"]["valid"] = checkName($name);
@@ -49,8 +50,14 @@ if(!empty($_POST)) {
     }
 
     if(!empty($_POST['seats'])) {
-        $totalPrice = calculate();
+        $totalPrice = calculateTotal($_POST);
         $errors["totalPrice"]["valid"] = $totalPrice > 0 ? true : false;
+    }
+
+    if(!empty($_POST["movie"]["id"])) {
+        $movieID = $_POST["movie"]["id"];
+        global $MOVIE;
+        $errors["movieID"]["valid"] = ($movieID === array_keys($MOVIE)) ? true : false;
     }
     
     //Check for errors, then increment the error count
@@ -63,8 +70,8 @@ if(!empty($_POST)) {
     //If no errors, submit and redirect to ticket page
     if($errorCount == 0) {
         $_SESSION["cart"] = $_POST;
+        //fputcsv();
         header("Location: receipt.php");
-        //fputcsv
     }
 }
 
@@ -306,10 +313,11 @@ if(!empty($_POST)) {
                         </div>
                         <iframe src="https://www.youtube.com/embed/4HmN9r1Fcr8"></iframe>
                         <span class="title">Make a booking:</span>
-                        <button type="button" onclick='updateForm("AHF", 0)'>Monday 6PM</button>
-                        <button type="button" onclick='updateForm("AHF", 1)'>Tuesday 6PM</button>
-                        <button type="button" onclick='updateForm("AHF", 2)'>Saturday 3PM</button>
-                        <button type="button" onclick='updateForm("AHF", 3)'>Sunday 3PM</button>
+                        <button type="button" onclick='updateForm("AHF", 0)'>Wednesday 12PM</button>
+                        <button type="button" onclick='updateForm("AHF", 1)'>Thursday 12PM</button>
+                        <button type="button" onclick='updateForm("AHF", 2)'>Friday 12PM</button>
+                        <button type="button" onclick='updateForm("AHF", 3)'>Saturday 9PM</button>
+                        <button type="button" onclick='updateForm("AHF", 4)'>Sunday 9PM</button>
                     </article>
                 </header>
             </section>

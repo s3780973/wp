@@ -456,6 +456,26 @@ pre {
 
 section#info {
     background: white;
+    page-break-after: always;
+    text-align: center;
+}
+
+section#tickets hr {
+    float: left;
+    width: 85%;
+}
+
+section#info div.receipt {
+    text-align: left;
+    border-radius: 0;
+    border: none;
+    width: 60%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: calc(8px + 0.7vw);
+}
+
+section#info p.price {
+    padding-left: 2vw;
 }
 
 section#tickets {

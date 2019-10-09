@@ -9,7 +9,6 @@ if(!empty($_SESSION)) {
     header("Location: index.php");
 }
 
-preShow($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -33,20 +32,39 @@ preShow($_SESSION);
 
 <body>
     <section id="info">
-        <div id="receipt">
+        <div class="receipt">
+            <h2>Booking Successful!</h2>
+            <h2>Company Details</h2>
+            <hr>
+            <p>Name</p>
+            <p class="price">Lunardo Cinema</p>
+            <p>ABN Number</p>
+            <p class="price">00 123 456 789</p>
+            <p>Address</p>
+            <p class="price">512 Raspberry Rd</p>
+            <h2>Customer Details</h2>
+            <hr>
+            <p>Name: <?php echo $_SESSION["cart"]["cust"]["name"]; ?></p>
+            <p>Email: <?php echo $_SESSION["cart"]["cust"]["email"]; ?></p>
+            <p>Mobile: <?php echo $_SESSION["cart"]["cust"]["mobile"]; ?></p>
+            <p>Card Number: <?php echo $_SESSION["cart"]["cust"]["card"]; ?></p>
+            <p>Card Expiry: <?php echo $_SESSION["cart"]["cust"]["expiry"]; ?></p>
+            <h2>Payment Information</h2>
+            <hr>
+            <?php generateSeatPricesHTML(); ?>
+            <br>
+            <p>Total: $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"])); ?></p>
+            <p>Total GST: $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"]) / 11); ?></p>   
         </div>
     </section>
 
     <section id="tickets">
-        <div class = "ticket">
-            <img src="../../media/barcode.png" style="float: right">
-            <h2>Lunardo Cinema | ADMIT ONE</h2>
-            <hr>
-            <h2>Test Ticket (M)</h2>
-            <p>Wednesday 7:30PM | Seat</p>
-        </div>
         <?php generateTickets(); ?>
     </section> 
+
+    <?php 
+    preShow($_SESSION);
+    ?>
 
 </body>
 

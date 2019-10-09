@@ -8,6 +8,29 @@ $MOVIE = [
   "AHF" => ["title" => "The Happy Prince", "rating" => "M","times" => ["WED" => "T12", "THU" => "T12", "FRI" => "T12", "SAT" => "T21", "SUN" => "T21"]]
 ];
 
+$SEATS = [
+  "STA" => "Standard Adult",
+  "STP" => "Standard Concession",
+  "STC" => "Standard Child",
+  "FCA" => "First Class Adult",
+  "FCP" => "First Class Concession",
+  "FCC" => "First Class Child"
+];
+
+/** 
+ * Checks if discount is active
+ * @param $_POST prior to form submissiom
+ * @param $_SESSION["cart"] after form submission
+ */
+function discount($array) {
+  return (strpos($array["movie"]["day"], "MON") !== false || strpos($array["movie"]["day"], "WED") !== false || strpos($array["movie"]["hour"], "T12") !== false) ? true : false;
+}
+
+function contains($needle, $haystack)
+{
+    return strpos($haystack, $needle) !== false;
+}
+
 // Put your PHP functions and modules here
 
 function checkName($name) {
@@ -15,7 +38,7 @@ function checkName($name) {
 }
 
 function checkEmail($email) {
-  return filter_var($email, FILTER_VALIDATE_EMAIL) ? true: false;
+  return filter_var($email, FILTER_VALIDATE_EMAIL) ? true : false;
 }
 
 function checkMobile($mobile) {
@@ -30,46 +53,71 @@ function checkExpiry($expiry) {
   return strtotime($expiry) > strtotime(date("Y-m"), "+1 Months") ? true : false;
 }
 
-function calculate() {
-  $discount = true;
-  $totalSTA = ($_POST['seats']['STA']) * ($discount ? 14.00 : 19.80);
-  $totalSTP = ($_POST['seats']['STP']) * ($discount ? 12.50 : 17.50);
-  $totalSTC = ($_POST['seats']['STC']) * ($discount ? 11.00 : 15.30);
-  $totalFCA = ($_POST['seats']['FCA']) * ($discount ? 24.00 : 30.00);
-  $totalFCP = ($_POST['seats']['FCP']) * ($discount ? 22.50 : 27.00);
-  $totalFCC = ($_POST['seats']['FCC']) * ($discount ? 21.00 : 24.00);
+/**
+ * Calculate total price for seats
+ * @param $_POST prior to form submission
+ * @param $_SESSION["cart"] after form submission
+ */
+function calculateTotal($array) {
+  $total = 0;
+  
+  foreach($array["seats"] as $key => $value) {
+    $total += calculateSeatPrice($array, $key);
+  }
 
-  $total = $totalSTA + $totalSTP + $totalSTC + $totalFCA + $totalFCP + $totalFCC;
-  //document.getElementById("total").innerHTML = "Total: $" + total.toFixed(2);
   return $total;
+}
+
+function calculateSeatPrice($array, $seatCode) {
+  $price = 0;
+  switch($seatCode) {
+    case "STA":
+    $price = ($array["seats"][$seatCode]) * (discount($array) ? 14.00 : 19.80);
+    break;
+    case "STP":
+    $price = ($array["seats"][$seatCode]) * (discount($array) ? 12.50 : 17.50);
+    break;
+    case "STC":
+    $price = ($array["seats"][$seatCode]) * (discount($array) ? 11.00 : 15.30);
+    break;
+    case "FCA":
+    $price = ($array["seats"][$seatCode]) * (discount($array) ? 24.00 : 30.00);
+    break;
+    case "FCP":
+    $price = ($array["seats"][$seatCode]) * (discount($array) ? 22.50 : 27.00);
+    break;
+    case "FCC":
+    $price = ($array["seats"][$seatCode]) * (discount($array) ? 21.00 : 24.00);
+    break;
+  }
+
+  return $price;
+}
+
+/** Generate seat prices for receipt using $_SESSION data */
+function generateSeatPricesHTML() {
+  global $SEATS;
+
+  foreach($_SESSION["cart"]["seats"] as $key => $value) {
+    if(calculateSeatPrice($_SESSION["cart"], $key) > 0) {
+      echo "<p>".$_SESSION["cart"]["seats"][$key]."x ".$SEATS[$key]." Ticket: $".sprintf("%.2f",calculateSeatPrice($_SESSION["cart"], $key))."<p>";
+    }
+  }
+
 }
 
 /** Can only be called after $_SESSION is initialised */
 function generateTickets() {
-  $seats = $_SESSION["cart"]["seats"];
-  for($i = 0; $i < $seats["STA"]; $i++) {
-    generateTicket("STA");
-  }
-  for($i = 0; $i < $seats["STP"]; $i++) {
-    generateTicket("STP");
-  }
-  for($i = 0; $i < $seats["STC"]; $i++) {
-    generateTicket("STC");
-  }
-  for($i = 0; $i < $seats["FCA"]; $i++) {
-    generateTicket("FCA");
-  }
-  for($i = 0; $i < $seats["FCP"]; $i++) {
-    generateTicket("FCP");
-  }
-  for($i = 0; $i < $seats["FCC"]; $i++) {
-    generateTicket("FCC");
+  foreach($_SESSION["cart"]["seats"] as $key => $value) {
+    for($i = 0; $i < $_SESSION["cart"]["seats"][$key]; $i++) {
+      generateTicket($key);
+    }
   }
 }
 
 $seatCount = 0;
 function generateTicket($type) {
-  $seat = "";
+  global $SEATS;
   global $MOVIE;
   
   $title = $MOVIE[$_SESSION["cart"]["movie"]["id"]]["title"];
@@ -78,36 +126,13 @@ function generateTicket($type) {
   global $seatCount;
   $seatCount++;
   
-  switch($type) {
-    case "STA":
-    $seat = "Standard Adult";
-    break;
-    case "STP":
-    $seat = "Standard Concession";
-    break;
-    case "STC":
-    $seat = "Standard Child";
-    break;
-    case "FCA":
-    $seat = "First Class Adult";
-    break;
-    case "FCP":
-    $seat = "First Class Concession";
-    break;
-    case "FCC":
-    $seat = "First Class Child";
-    break;
-    default:
-    $seat = "Unknown Seat";
-  }
-  
   $ticket = <<<TICKET
   <div class = "ticket">
     <img src="../../media/barcode.png" style="float: right">
     <h2>Lunardo Cinema | ADMIT ONE</h2>
     <hr>
     <h2>$title (M)</h2>
-    <p>Wednesday 7:30PM | $seat<br>Row D | Seat $seatCount</p>
+    <p>Wednesday 7:30PM | {$SEATS[$type]}<br>Row D | Seat $seatCount</p>
   </div>
 TICKET;
 
