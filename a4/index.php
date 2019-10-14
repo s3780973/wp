@@ -1,66 +1,76 @@
 <?php
 include_once('tools.php');
-//check if form has been submitted
 
+/*
 $name = "";
 $email = "";
 $mobile = "";
 $card = "";
 $expiry = "";
+*/
 
 $totalPrice = 0;
 
 $errors = [ //SET INITIAL TO FALSE
-    "movieID" => ["valid" => false, "message" => "Stop trying to hack the movie ID!"],
-    "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
     "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
     "mobile" => ["valid" => false, "message" => "Mobile invalid!"],
     "card" => ["valid" => true, "message" => "card invalid!"],
-    "expiry" => ["valid" => false, "message" => "expiry invalid!"]
+    "expiry" => ["valid" => false, "message" => "expiry invalid!"],
+    "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
+    "movieID" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movieID)"]
 ];
 
 $errorCount = 0;
 
 if(!empty($_POST)) {
-    echo("DISCOUNT? ".discount($_POST));
+
+    //validate name
     if(!empty($_POST['cust']['name'])) {
         $name = $_POST["cust"]['name'];
         $errors["name"]["valid"] = checkName($name);
     }
 
+    //validate email
     if(!empty($_POST['cust']['email'])) {
         $email = $_POST["cust"]['email'];
         $errors["email"]["valid"] = checkEmail($email);
     }
 
+    //validate mobile
     if(!empty($_POST['cust']['mobile'])) {
         $mobile = $_POST["cust"]['mobile'];
         $errors["mobile"]["valid"] = checkMobile($mobile);
     }
 
+    //validate card
     if(!empty($_POST['cust']['card'])) {
         $card = $_POST["cust"]['card'];
         $errors["card"]["valid"] = checkName($name);
     }
 
+    //validate expiry
     if(!empty($_POST['cust']['expiry'])) {
         $expiry = $_POST["cust"]['expiry'];
         $errors["expiry"]["valid"] = checkExpiry($expiry);
     }
 
+    //valite seats (must buy at least 1)
     if(!empty($_POST['seats'])) {
         $totalPrice = calculateTotal($_POST);
         $errors["totalPrice"]["valid"] = $totalPrice > 0 ? true : false;
     }
 
+    //validate movie id
     if(!empty($_POST["movie"]["id"])) {
         $movieID = $_POST["movie"]["id"];
         global $MOVIE;
-        $errors["movieID"]["valid"] = ($movieID === array_keys($MOVIE)) ? true : false;
+        $errors["movieID"]["valid"] = (array_key_exists($movieID, $MOVIE)) ? true : false;
     }
+
+    //validate movie day
     
-    //Check for errors, then increment the error count
+    //Check for errors and if present, increment the error count
     foreach($errors as $item) {
         if(!$item["valid"]) $errorCount++;
     }
@@ -72,6 +82,11 @@ if(!empty($_POST)) {
         $_SESSION["cart"] = $_POST;
         //fputcsv();
         header("Location: receipt.php");
+    }
+
+    //Show alert if hidden field is invalid
+    if(!$errors["movieID"]["valid"]) {
+        showErrorAlert($errors["movieID"]["message"]);
     }
 }
 

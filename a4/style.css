@@ -20,6 +20,8 @@ body {
     font-weight: 600;
 }
 
+body {}
+
 img {
     padding: 0;
     /*display: block; */
@@ -454,10 +456,37 @@ pre {
 
 /* <------------------------------------------------- RECEIPT PAGE CSS -------------------------------------------------------> */
 
+@media print {
+    html#receipt,
+    body#receipt {
+        width: 100%;
+    }
+}
+
+html#receipt,
+body#receipt {
+    background-image: url("../../media/receipt-background.png");
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* width: 100%; */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 section#info {
     background: white;
     page-break-after: always;
     text-align: center;
+    width: 70%;
+    border: 0.35vw black solid;
+}
+
+section#info h1 {
+    text-align: center;
+    font-size: calc(20px + 1.4vw);
 }
 
 section#tickets hr {
@@ -467,10 +496,9 @@ section#tickets hr {
 
 section#info div.receipt {
     text-align: left;
-    border-radius: 0;
     border: none;
-    width: 60%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 80%;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: calc(8px + 0.7vw);
 }
 
@@ -479,27 +507,36 @@ section#info p.price {
 }
 
 section#tickets {
-    background: pink;
+    border: none;
     text-align: center;
 }
 
-div.ticket {
+section#tickets div#ticket {
     margin: 0;
     border-radius: 0;
-    border: 0.5vw rgb(175, 105, 24) groove;
-    width: calc(200px + 20vw);
-    height: calc(75px + 7vw);
+    /* border: 0.5vw rgb(167, 163, 160) groove; */
+    width: calc(180px + 18vw);
+    height: calc(75px + 6vw);
     display: inline-block;
-    background: wheat;
     text-align: left;
 }
 
-div.ticket h2 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: calc(10px + 1vw);
+section#tickets div.ticket-standard {
+    border: 0.5vw rgb(161, 154, 148) groove;
+    background: rgb(243, 236, 223);
 }
 
-div.ticket p {
+section#tickets div.ticket-premium {
+    border: 0.5vw rgb(175, 105, 24) groove;
+    background: wheat;
+}
+
+section#tickets h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: calc(9px + 0.8vw);
+}
+
+section#tickets p {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: calc(8px + 0.7vw);
 }

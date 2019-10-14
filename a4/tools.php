@@ -8,7 +8,24 @@ $MOVIE = [
   "AHF" => ["title" => "The Happy Prince", "rating" => "M","times" => ["WED" => "T12", "THU" => "T12", "FRI" => "T12", "SAT" => "T21", "SUN" => "T21"]]
 ];
 
-$SEATS = [
+$DAY_NAMES = [
+  "MON" => "Monday",
+  "TUE" => "Tuesday",
+  "WED" => "Wednesday",
+  "THU" => "Thursday",
+  "FRI" => "Friday",
+  "SAT" => "Saturday",
+  "SUN" => "Sunday"
+];
+
+$TIME_NAMES = [
+  "T12" => "12:00PM",
+  "T15" => "3:00PM",
+  "T18" => "6:00PM",
+  "T21" => "9:00PM"
+];
+
+$SEAT_NAMES = [
   "STA" => "Standard Adult",
   "STP" => "Standard Concession",
   "STC" => "Standard Child",
@@ -17,40 +34,43 @@ $SEATS = [
   "FCC" => "First Class Child"
 ];
 
+function checkName($name) {
+  return preg_match("/^[a-zA-Z \-.']{1,100}$/", $name);
+}
+
+function checkEmail($email) {
+  return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+function checkMobile($mobile) {
+  return preg_match("/^(\(04\)|04|\+614)( ?\d){8}$/", $mobile);
+}
+
+function checkCard($card) {
+}
+
+function checkExpiry($expiry) {
+  return strtotime($expiry) > strtotime(date("Y-m"), "+1 Months");
+}
+
+function showErrorAlert($string) {
+
+  $alert = <<<ALERT
+  <script>
+  alert("$string");
+  </script>
+ALERT;
+
+  echo $alert;
+}
+
 /** 
  * Checks if discount is active
  * @param $_POST prior to form submissiom
  * @param $_SESSION["cart"] after form submission
  */
 function discount($array) {
-  return (strpos($array["movie"]["day"], "MON") !== false || strpos($array["movie"]["day"], "WED") !== false || strpos($array["movie"]["hour"], "T12") !== false) ? true : false;
-}
-
-function contains($needle, $haystack)
-{
-    return strpos($haystack, $needle) !== false;
-}
-
-// Put your PHP functions and modules here
-
-function checkName($name) {
-  return preg_match("/^[a-zA-Z \-.']{1,100}$/", $name) ? true : false;
-}
-
-function checkEmail($email) {
-  return filter_var($email, FILTER_VALIDATE_EMAIL) ? true : false;
-}
-
-function checkMobile($mobile) {
-  return preg_match("/^(\(04\)|04|\+614)( ?\d){8}$/", $mobile) ? true : false;
-}
-
-function checkCard($card) {
-
-}
-
-function checkExpiry($expiry) {
-  return strtotime($expiry) > strtotime(date("Y-m"), "+1 Months") ? true : false;
+  return strpos($array["movie"]["day"], "MON") !== false || strpos($array["movie"]["day"], "WED") !== false || strpos($array["movie"]["hour"], "T12") !== false;
 }
 
 /**
@@ -94,18 +114,6 @@ function calculateSeatPrice($array, $seatCode) {
   return $price;
 }
 
-/** Generate seat prices for receipt using $_SESSION data */
-function generateSeatPricesHTML() {
-  global $SEATS;
-
-  foreach($_SESSION["cart"]["seats"] as $key => $value) {
-    if(calculateSeatPrice($_SESSION["cart"], $key) > 0) {
-      echo "<p>".$_SESSION["cart"]["seats"][$key]."x ".$SEATS[$key]." Ticket: $".sprintf("%.2f",calculateSeatPrice($_SESSION["cart"], $key))."<p>";
-    }
-  }
-
-}
-
 /** Can only be called after $_SESSION is initialised */
 function generateTickets() {
   foreach($_SESSION["cart"]["seats"] as $key => $value) {
@@ -116,27 +124,59 @@ function generateTickets() {
 }
 
 $seatCount = 0;
-function generateTicket($type) {
-  global $SEATS;
+function generateTicket($seatID) {
   global $MOVIE;
+  global $DAY_NAMES;
+  global $TIME_NAMES;
+  global $SEAT_NAMES;
   
   $title = $MOVIE[$_SESSION["cart"]["movie"]["id"]]["title"];
   $rating = $MOVIE[$_SESSION["cart"]["movie"]["id"]]["rating"];
+  $day = $DAY_NAMES[$_SESSION["cart"]["movie"]["day"]];
+  $time = $TIME_NAMES[$_SESSION["cart"]["movie"]["hour"]];
+  $seat = $SEAT_NAMES[$seatID];
+
+  $premium = ($seatID[0] == "F") ? "ticket-premium" : "ticket-standard";
 
   global $seatCount;
   $seatCount++;
   
   $ticket = <<<TICKET
-  <div class = "ticket">
+  <div id="ticket" class= "$premium">
     <img src="../../media/barcode.png" style="float: right">
     <h2>Lunardo Cinema | ADMIT ONE</h2>
     <hr>
-    <h2>$title (M)</h2>
-    <p>Wednesday 7:30PM | {$SEATS[$type]}<br>Row D | Seat $seatCount</p>
+    <h2>$title ($rating)</h2>
+    <p>$day $time | $seat<br>Location: Row D, Seat $seatCount</p>
   </div>
 TICKET;
 
   echo($ticket);
+}
+
+/** Get the data to write to bookings.txt */
+function getFileData() {
+  global $DAY_NAMES;
+  global $TIME_NAMES;
+
+  $fileData = [
+    date("Y-m-d h:m:s"),
+    $_SESSION["cart"]["cust"]["name"],
+    $_SESSION["cart"]["cust"]["email"],
+    $_SESSION["cart"]["cust"]["mobile"],
+    $_SESSION["cart"]["movie"]["id"],
+    $DAY_NAMES[$_SESSION["cart"]["movie"]["day"]],
+    $TIME_NAMES[$_SESSION["cart"]["movie"]["hour"]],
+    $_SESSION["cart"]["seats"]["STA"],
+    $_SESSION["cart"]["seats"]["STP"],
+    $_SESSION["cart"]["seats"]["STC"],
+    $_SESSION["cart"]["seats"]["FCA"],
+    $_SESSION["cart"]["seats"]["FCP"],
+    $_SESSION["cart"]["seats"]["FCC"],
+    sprintf("%0.2f", calculateTotal($_SESSION["cart"]))
+  ];
+
+  return $fileData;
 }
 
 function php2js( $arr, $arrName ) {
@@ -163,6 +203,5 @@ function printMyCode() {
     echo '<li>'.rtrim(htmlentities($line)).'</li>';
   echo '</ol></pre>';
 }
-
 
 ?>

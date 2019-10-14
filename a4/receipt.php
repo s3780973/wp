@@ -2,8 +2,14 @@
 include_once('tools.php');
 
 if(!empty($_SESSION)) {
-    $numSeats = $_SESSION["cart"]["seats"]["STA"];
-    echo $numSeats;
+    //$numSeats = $_SESSION["cart"]["seats"]["STA"];
+    $file = fopen("bookings.txt", "a");
+
+    flock($file, LOCK_EX);
+    //fputcsv($file, getFileData(), ",");
+    flock($file, LOCK_UN);
+
+    fclose($file);
 
 } else {
     header("Location: index.php");
@@ -12,7 +18,7 @@ if(!empty($_SESSION)) {
 ?>
 
 <!DOCTYPE html>
-<html lang='en'>
+<html id="receipt" lang='en'>
 
 <head>
     <meta charset="utf-8">
@@ -30,18 +36,17 @@ if(!empty($_SESSION)) {
 	<script type="text/javascript" src="../a4/script.js"></script>
 </head>
 
-<body>
+<body id="receipt">
     <section id="info">
         <div class="receipt">
-            <h2>Booking Successful!</h2>
-            <h2>Company Details</h2>
+            <h1>Lunardo Cinema</h1>
+            <p style="text-align: center">ABN: 00 123 456 789</p>
+            <br>
+            <h2>Session Details</h2>
             <hr>
-            <p>Name</p>
-            <p class="price">Lunardo Cinema</p>
-            <p>ABN Number</p>
-            <p class="price">00 123 456 789</p>
-            <p>Address</p>
-            <p class="price">512 Raspberry Rd</p>
+            <p>Title: <?php echo $MOVIE[$_SESSION["cart"]["movie"]["id"]]["title"]." (".$MOVIE[$_SESSION["cart"]["movie"]["id"]]["rating"],")"; ?></p>
+            <p>Session: <?php echo $DAY_NAMES[$_SESSION["cart"]["movie"]["day"]]." ".$TIME_NAMES[$_SESSION["cart"]["movie"]["hour"]]; ?></p>
+            <br>
             <h2>Customer Details</h2>
             <hr>
             <p>Name: <?php echo $_SESSION["cart"]["cust"]["name"]; ?></p>
@@ -49,16 +54,27 @@ if(!empty($_SESSION)) {
             <p>Mobile: <?php echo $_SESSION["cart"]["cust"]["mobile"]; ?></p>
             <p>Card Number: <?php echo $_SESSION["cart"]["cust"]["card"]; ?></p>
             <p>Card Expiry: <?php echo $_SESSION["cart"]["cust"]["expiry"]; ?></p>
+            <br>
             <h2>Payment Information</h2>
             <hr>
-            <?php generateSeatPricesHTML(); ?>
+            <?php
+            foreach($_SESSION["cart"]["seats"] as $key => $value) {
+              if(calculateSeatPrice($_SESSION["cart"], $key) > 0) {
+                echo "<p>".$_SESSION["cart"]["seats"][$key]."x ".$SEAT_NAMES[$key].": $".sprintf("%.2f",calculateSeatPrice($_SESSION["cart"], $key))."<p>";
+              }
+            }
+            ?>
             <br>
             <p>Total: $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"])); ?></p>
-            <p>Total GST: $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"]) / 11); ?></p>   
+            <p>Total (GST): $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"]) / 11); ?></p>  
+            <br><br><hr>
+            <p style="text-align: center">Contact Us: Phone: 94 852 720 | Address: 512 Rasperry Road</p>
+
         </div>
     </section>
 
     <section id="tickets">
+	<br>
         <?php generateTickets(); ?>
     </section> 
 
