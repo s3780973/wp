@@ -47,6 +47,7 @@ function checkMobile($mobile) {
 }
 
 function checkCard($card) {
+	//
 }
 
 function checkExpiry($expiry) {

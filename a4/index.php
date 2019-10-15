@@ -1,93 +1,103 @@
 <?php
 include_once('tools.php');
 
-/*
-$name = "";
-$email = "";
-$mobile = "";
-$card = "";
-$expiry = "";
-*/
-
 $totalPrice = 0;
 
-$errors = [ //SET INITIAL TO FALSE
+$ERROR = [
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
     "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
     "mobile" => ["valid" => false, "message" => "Mobile invalid!"],
     "card" => ["valid" => true, "message" => "card invalid!"],
     "expiry" => ["valid" => false, "message" => "expiry invalid!"],
     "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
-    "movieID" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movieID)"]
+    "movieID" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movie id)"],
+	"time" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movie date and time)"]
 ];
 
 $errorCount = 0;
 
 if(!empty($_POST)) {
+	
+	//<--------- VALIDATION --------->
 
     //validate name
     if(!empty($_POST['cust']['name'])) {
         $name = $_POST["cust"]['name'];
-        $errors["name"]["valid"] = checkName($name);
+        $ERROR["name"]["valid"] = checkName($name);
     }
 
     //validate email
     if(!empty($_POST['cust']['email'])) {
         $email = $_POST["cust"]['email'];
-        $errors["email"]["valid"] = checkEmail($email);
+        $ERROR["email"]["valid"] = checkEmail($email);
     }
 
     //validate mobile
     if(!empty($_POST['cust']['mobile'])) {
         $mobile = $_POST["cust"]['mobile'];
-        $errors["mobile"]["valid"] = checkMobile($mobile);
+        $ERROR["mobile"]["valid"] = checkMobile($mobile);
     }
 
     //validate card
     if(!empty($_POST['cust']['card'])) {
         $card = $_POST["cust"]['card'];
-        $errors["card"]["valid"] = checkName($name);
+        $ERROR["card"]["valid"] = checkName($name);
     }
 
     //validate expiry
     if(!empty($_POST['cust']['expiry'])) {
         $expiry = $_POST["cust"]['expiry'];
-        $errors["expiry"]["valid"] = checkExpiry($expiry);
+        $ERROR["expiry"]["valid"] = @checkExpiry($expiry);
     }
 
     //valite seats (must buy at least 1)
     if(!empty($_POST['seats'])) {
         $totalPrice = calculateTotal($_POST);
-        $errors["totalPrice"]["valid"] = $totalPrice > 0 ? true : false;
+        $ERROR["totalPrice"]["valid"] = $totalPrice > 0 ? true : false;
     }
 
     //validate movie id
     if(!empty($_POST["movie"]["id"])) {
         $movieID = $_POST["movie"]["id"];
-        global $MOVIE;
-        $errors["movieID"]["valid"] = (array_key_exists($movieID, $MOVIE)) ? true : false;
+        
+		global $MOVIE;
+        $ERROR["movieID"]["valid"] = array_key_exists($movieID, $MOVIE);
     }
 
-    //validate movie day
+    //validate movie day and time
+	if(!empty($_POST["movie"]["day"]) && !empty($_POST["movie"]["hour"])) {
+		$day = $_POST["movie"]["day"];
+		$time = $_POST["movie"]["hour"];
+		
+		global $MOVIE;
+		$ERROR["time"]["valid"] = ($time == @$MOVIE[$_POST["movie"]["id"]]["times"][$day]);
+	}
+		
+	//<------- ERROR DETECTION -------->
     
     //Check for errors and if present, increment the error count
-    foreach($errors as $item) {
+    foreach($ERROR as $item) {
         if(!$item["valid"]) $errorCount++;
     }
 
-    echo "ERROR COUNT: ".$errorCount;
-
-    //If no errors, submit and redirect to ticket page
+	//If no errors, submit and redirect to ticket page
+	//Redirects to receipt.php
     if($errorCount == 0) {
         $_SESSION["cart"] = $_POST;
-        //fputcsv();
         header("Location: receipt.php");
     }
-
-    //Show alert if hidden field is invalid
-    if(!$errors["movieID"]["valid"]) {
-        showErrorAlert($errors["movieID"]["message"]);
+    
+	//<----------- ALERTS ----------->
+	
+	//Show alert if hidden movieID field is invalid
+    if(!$ERROR["movieID"]["valid"]) {
+        showErrorAlert($ERROR["movieID"]["message"]);
     }
+	
+	//Show alert if hidden time and hour field is invalid
+	if(!$ERROR["time"]["valid"]) {
+		showErrorAlert($ERROR["time"]["message"]);
+	}
 }
 
 ?>

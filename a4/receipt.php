@@ -78,10 +78,6 @@ if(!empty($_SESSION)) {
         <?php generateTickets(); ?>
     </section> 
 
-    <?php 
-    preShow($_SESSION);
-    ?>
-
 </body>
 
 </html>
