@@ -2,7 +2,6 @@
 include_once('tools.php');
 
 if(!empty($_SESSION)) {
-    //$numSeats = $_SESSION["cart"]["seats"]["STA"];
     $file = fopen("bookings.txt", "a");
 
     flock($file, LOCK_EX);
@@ -66,7 +65,7 @@ if(!empty($_SESSION)) {
             ?>
             <br>
             <p>Total: $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"])); ?></p>
-            <p>Total (GST): $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"]) / 11); ?></p>  
+            <p>Includes GST: $<?php echo sprintf("%.2f", calculateTotal($_SESSION["cart"]) / 11); ?></p>  
             <br><br><hr>
             <p style="text-align: center">Contact Us: Phone: 94 852 720 | Address: 512 Rasperry Road</p>
 

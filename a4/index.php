@@ -7,7 +7,7 @@ $ERROR = [
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
     "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
     "mobile" => ["valid" => false, "message" => "Mobile invalid!"],
-    "card" => ["valid" => true, "message" => "card invalid!"],
+    "card" => ["valid" => false, "message" => "card invalid!"],
     "expiry" => ["valid" => false, "message" => "expiry invalid!"],
     "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
     "movieID" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movie id)"],
@@ -53,7 +53,7 @@ if(!empty($_POST)) {
     //valite seats (must buy at least 1)
     if(!empty($_POST['seats'])) {
         $totalPrice = calculateTotal($_POST);
-        $ERROR["totalPrice"]["valid"] = $totalPrice > 0 ? true : false;
+        $ERROR["totalPrice"]["valid"] = $totalPrice > 0;
     }
 
     //validate movie id
@@ -416,7 +416,7 @@ if(!empty($_POST)) {
                         <label for="cust-name">Name</label>
                         <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" value="<?php echo isset($_POST["cust"]["name"]) ? $_POST["cust"]["name"] : ""; ?>">
                         <br>   
-                        <p class="error" id="name-invalid"><?php echo $errors["name"]["valid"] ? "" : $errors["name"]["message"] ?></p>          
+                        <p class="error" id="name-invalid"><?php echo $errors["name"]["valid"] ? "" : $errors["name"]["message"] ?></p> <!-- use isSet -->       
                         <label for="cust-email">Email</label>
                         <input id="cust-email" name="cust[email]" type="email" placeholder="Enter email" value="<?php echo isset($_POST["cust"]["email"]) ? $_POST["cust"]["email"] : ""; ?>">
                         <br>
