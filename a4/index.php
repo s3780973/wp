@@ -6,12 +6,13 @@ $totalPrice = 0;
 $ERROR = [
     "name" => ["valid" => false, "message" => "Names can include letters a-z, ( ' ), ( _ ) or ( - )"],
     "email" => ["valid" => false, "message" => "Emails must be in the format example@email.com"],
-    "mobile" => ["valid" => false, "message" => "Mobile invalid!"],
-    "card" => ["valid" => false, "message" => "card invalid!"],
-    "expiry" => ["valid" => false, "message" => "expiry invalid!"],
+    "mobile" => ["valid" => false, "message" => "Mobile must be an Australian number"],
+    "card" => ["valid" => false, "message" => "Card numbers must include 15-19 numbers"],
+    "expiry" => ["valid" => false, "message" => "Expiry must be at least 1 month ahead from today"],
     "totalPrice" => ["valid" => false, "message" => "You must buy at least 1 ticket"],
     "movieID" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movie id)"],
-	"time" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movie date and time)"]
+    "time" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid movie date and time)"],
+    "seats" => ["valid" => false, "message" => "Stop trying to hack our website! (Invalid seat amount)"]
 ];
 
 $errorCount = 0;
@@ -50,10 +51,19 @@ if(!empty($_POST)) {
         $ERROR["expiry"]["valid"] = @checkExpiry($expiry);
     }
 
-    //valite seats (must buy at least 1)
+    //valite seats (price must be more than $0 and cannot buy negative or greater than 10 seats)
     if(!empty($_POST['seats'])) {
         $totalPrice = calculateTotal($_POST);
         $ERROR["totalPrice"]["valid"] = $totalPrice > 0;
+
+        $seatErrorCount = 0;
+        foreach($_POST["seats"] as $key => $value) {
+            if($value < 0 || $value > 10) {
+                $seatErrorCount++;
+            }
+        }
+
+        $ERROR["seats"]["valid"] = $seatErrorCount === 0;
     }
 
     //validate movie id
@@ -87,7 +97,7 @@ if(!empty($_POST)) {
         header("Location: receipt.php");
     }
     
-	//<----------- ALERTS ----------->
+    //<----------- ALERTS ----------->
 	
 	//Show alert if hidden movieID field is invalid
     if(!$ERROR["movieID"]["valid"]) {
@@ -97,7 +107,12 @@ if(!empty($_POST)) {
 	//Show alert if hidden time and hour field is invalid
 	if(!$ERROR["time"]["valid"]) {
 		showErrorAlert($ERROR["time"]["message"]);
-	}
+    }
+
+    //Show alert if seat values are invalid
+    if(!$ERROR["seats"]["valid"]) {
+        showErrorAlert($ERROR["seats"]["message"]);
+    }
 }
 
 ?>
@@ -414,23 +429,27 @@ if(!empty($_POST)) {
                     </div>
                     <div id="cust_details">
                         <label for="cust-name">Name</label>
-                        <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" value="<?php echo isset($_POST["cust"]["name"]) ? $_POST["cust"]["name"] : ""; ?>">
+                        <input id="cust-name" name="cust[name]" type="text" placeholder="Enter full name" value="<?php echo isset($_POST["cust"]["name"]) ? $_POST["cust"]["name"] : ""; ?>" oninput="'checkName()'">
                         <br>   
-                        <p class="error" id="name-invalid"><?php echo $errors["name"]["valid"] ? "" : $errors["name"]["message"] ?></p> <!-- use isSet -->       
+                        <p class="error" id="name-invalid"><?php echo $ERROR["name"]["valid"] ? "" : $ERROR["name"]["message"] ?></p>    
                         <label for="cust-email">Email</label>
                         <input id="cust-email" name="cust[email]" type="email" placeholder="Enter email" value="<?php echo isset($_POST["cust"]["email"]) ? $_POST["cust"]["email"] : ""; ?>">
                         <br>
-						<br> 
+						<p class="error" id="email-invalid"><?php echo $ERROR["email"]["valid"] ? "" : $ERROR["email"]["message"] ?></p>
                         <label for="cust-mobile">Mobile</label>
-                        <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" value="<?php echo isset($_POST["cust"]["mobile"]) ? $_POST["cust"]["mobile"] : ""; ?>" oninput="checkMobile()">
+                        <input id="cust-mobile" name="cust[mobile]" type="tel" placeholder="Enter mobile" value="<?php echo isset($_POST["cust"]["mobile"]) ? $_POST["cust"]["mobile"] : ""; ?>" oninput="'checkMobile()'">
                         <br>
-						<p class="error" id="mobile-invalid">Please enter a valid mobile!</p>  
+						<p class="error" id="mobile-invalid"><?php echo $ERROR["mobile"]["valid"] ? "" : $ERROR["mobile"]["message"] ?></p>  
                         <label for="cust-card">Credit Card</label>
-                        <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" value="<?php echo isset($_POST["cust"]["card"]) ? $_POST["cust"]["card"] : ""; ?>" oninput="checkCard()">
+                        <input id="cust-card" name="cust[card]" type="text" placeholder="Enter credit card number" value="<?php echo isset($_POST["cust"]["card"]) ? $_POST["cust"]["card"] : ""; ?>" oninput="'checkCard()'">
                         <br>
-						<p class="error" id="card-invalid">Please enter a valid card number!</p>  
+						<p class="error" id="card-invalid"><?php echo $ERROR["card"]["valid"] ? "" : $ERROR["card"]["message"] ?></p>  
                         <label for="cust-expiry">Expiry</label>
-                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" value="<?php echo isset($_POST["cust"]["expiry"]) ? $_POST["cust"]["expiry"] : ""; ?>" onclick="getMinDate()">
+                        <input id="cust-expiry" name="cust[expiry]" type="month" placeholder = "Enter credit card expiry" value="<?php echo isset($_POST["cust"]["expiry"]) ? $_POST["cust"]["expiry"] : ""; ?>" onclick="'getMinDate()'">
+                        <br>
+                        <p class="error" id="expiry-invalid"><?php echo $ERROR["expiry"]["valid"] ? "" : $ERROR["expiry"]["message"] ?></p>
+                        <br>
+                        <p class="error" id="price-invalid"><?php echo $ERROR["totalPrice"]["valid"] ? "" : $ERROR["totalPrice"]["message"] ?></p>
                     </div>
                     <input id="submit_button" type="submit" value="Submit">
                     <h2 id="total">Total: $0.00</h2>
