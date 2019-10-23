@@ -2,10 +2,11 @@
 include_once('tools.php');
 
 if(!empty($_SESSION)) {
+    //write to file
     $file = fopen("bookings.txt", "a");
 
     flock($file, LOCK_EX);
-    //fputcsv($file, getFileData(), ",");
+    fputcsv($file, getFileData(), ",");
     flock($file, LOCK_UN);
 
     fclose($file);

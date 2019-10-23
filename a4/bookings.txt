@@ -1,1 +1,10 @@
 Date	Name	Email	Mobile	MovieID	Day	Hour	STA Qty	STP Qty	STC Qty	FCA Qty	FCP Qty	FCC Qty	Total
+"2019-10-23 12:10:33","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:59","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:28","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:43","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:02","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:21","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:35","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:54","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30
+"2019-10-23 12:10:14","John Doe",john.doe@email.com,0417849370,ACT,Friday,9:00PM,3,0,3,2,1,1,216.30

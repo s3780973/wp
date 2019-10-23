@@ -520,13 +520,15 @@ section#tickets div#ticket {
 }
 
 section#tickets div.ticket-standard {
-    border: 0.5vw rgb(161, 154, 148) groove;
-    background: rgb(243, 236, 223);
+    /* border: 0.5vw rgb(161, 154, 148) groove; */
+    /* background: rgb(243, 236, 223); */
+    border: 0.5vw rgb(175, 105, 24) groove;
+    background: wheat;
 }
 
 section#tickets div.ticket-premium {
-    border: 0.5vw rgb(175, 105, 24) groove;
-    background: wheat;
+    border: 0.5vw rgb(145, 101, 14) groove;
+    background: rgb(233, 191, 113);
 }
 
 section#tickets h2 {

@@ -135,6 +135,7 @@ function generateTicket($seatID) {
   $rating = $MOVIE[$_SESSION["cart"]["movie"]["id"]]["rating"];
   $day = $DAY_NAMES[$_SESSION["cart"]["movie"]["day"]];
   $time = $TIME_NAMES[$_SESSION["cart"]["movie"]["hour"]];
+  $seat = $SEAT_NAMES[$seatID];
 
   $premium = ($seatID[0] == "F") ? "ticket-premium" : "ticket-standard";
 
